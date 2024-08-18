@@ -1,1 +1,1 @@
-Projeto de SGBD da disciplina de GDI
+Projeto de SGDB da disciplina de GDI
