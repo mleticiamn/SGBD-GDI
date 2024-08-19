@@ -21,12 +21,27 @@ VALUES
 INSERT INTO
     usuario (email, nome, sobrenome, data_nasc)
 VALUES
-    ('jade.oliveira@gmail.com', 'Jade','Oliveira', '22-08-1995');
+    ('jane.austen@gmail.com', 'Jane','Austen', '16-12-1775');
 
 INSERT INTO
     usuario (email, nome, sobrenome, data_nasc)
 VALUES
-    ('rosa.pires@gmail.com', 'Rosa','Pires', '20-09-1998');
+    ('rick.riordan@gmail.com', 'Rick','Riordan', '05-06-1964');
+
+INSERT INTO
+    usuario (email, nome, sobrenome, data_nasc)
+VALUES
+    ('john.green@gmail.com', 'John','Green', '24-08-1977');
+
+INSERT INTO
+    usuario (email, nome, sobrenome, data_nasc)
+VALUES
+    ('machado.de.assis@gmail.com', 'Machado','de Assis', '21-06-1839');
+
+INSERT INTO
+    usuario (email, nome, sobrenome, data_nasc)
+VALUES
+    ('paula.pimenta@gmail.com', 'Paula','Pimenta', '02-06-1975');
 
 INSERT INTO
     usuario (email, nome, sobrenome, data_nasc)
