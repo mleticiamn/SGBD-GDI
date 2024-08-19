@@ -10,7 +10,8 @@ CREATE TABLE telefones (
     email VARCHAR2(50),
     telefone VARCHAR2(14),
     CONSTRAINT telefones_pkey PRIMARY KEY (email, telefone),
-    CONSTRAINT telefones_usuario_fkey FOREIGN KEY (email) REFERENCES usuario (email)
+    CONSTRAINT telefones_usuario_fkey FOREIGN KEY (email) REFERENCES usuario (email),
+    CONSTRAINT telefone_format CHECK (telefone LIKE '__-_________')
 );
 
 CREATE TABLE autor (
