@@ -31,7 +31,7 @@ CREATE TABLE premios (
 CREATE TABLE publicacao (
     email VARCHAR2(50),
     cod_pub NUMBER,
-    conteudo VARCHAR2(250) NOT NULL,
+    conteudo VARCHAR2(700) NOT NULL,
     data_pub DATE NOT NULL,
     CONSTRAINT publicacao_pkey PRIMARY KEY (email, cod_pub)
 );
@@ -55,7 +55,7 @@ CREATE TABLE obra (
     
 CREATE TABLE sinopses (
     cod_obra NUMBER,
-    sinopse VARCHAR(200) NOT NULL,
+    sinopse VARCHAR(400) NOT NULL,
     CONSTRAINT sinopses_pkey PRIMARY KEY (cod_obra, sinopse),
     CONSTRAINT sinopses_obra_fkey FOREIGN KEY (cod_obra) REFERENCES obra (cod_obra)
 );
