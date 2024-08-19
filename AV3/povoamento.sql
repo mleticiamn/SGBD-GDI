@@ -565,3 +565,51 @@ VALUES (16,'Agatha Christie');
 
 
 ------- GENEROS -------
+INSERT INTO generos (cod_obra, genero)
+VALUES (1, 'Fantasia');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (2, 'Romance');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (3, 'Juvenil');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (4, 'Distopia');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (5, 'Clássico');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (6, 'Fantasia');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (7, 'Romance Clássico');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (8, 'Aventura');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (9, 'Romance');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (10, 'Drama');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (11, 'Realismo');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (12, 'Fantasia');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (13, 'Romance Gótico');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (14, 'Ficção');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (15, 'Realismo');
+
+INSERT INTO generos (cod_obra, genero)
+VALUES (16, 'Mistério');
+
