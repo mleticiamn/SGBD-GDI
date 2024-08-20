@@ -705,9 +705,27 @@ VALUES ('mcta@cin.ufpe.br', 17, seq_cod_com.NEXTVAL, 'é um clássico, mas não 
 INSERT INTO comentario (email, cod_pub, cod_com, conteudo)
 VALUES ('mlmn3@cin.ufpe.br', 20, seq_cod_com.NEXTVAL, 'Não darei spoilers, mas o final é bem interessante');
 
-
 --------- COMENTAR --------
+INSERT INTO comentar (email, cod_pub, cod_com)
+VALUES ('gmsmr@cin.ufpe.br', 9, 1);
 
+INSERT INTO comentar (email, cod_pub, cod_com)
+VALUES ('gmsmr@cin.ufpe.br', 9, 2);
+
+INSERT INTO comentar (email, cod_pub, cod_com)
+VALUES ('john.green@gmail.com', 12, 3);
+
+INSERT INTO comentar (email, cod_pub, cod_com)
+VALUES ('john.green@gmail.com', 12, 4);
+
+INSERT INTO comentar (email, cod_pub, cod_com)
+VALUES ('mcta@cin.ufpe.br', 17, 5);
+
+INSERT INTO comentar (email, cod_pub, cod_com)
+VALUES ('mcta@cin.ufpe.br', 17, 6);
+
+INSERT INTO comentar (email, cod_pub, cod_com)
+VALUES ('mlmn3@cin.ufpe.br', 20, 7);
 
 --------- SEGUIR --------
 INSERT INTO seguir (seguidor, seguido)
