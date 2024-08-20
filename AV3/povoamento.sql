@@ -790,3 +790,34 @@ VALUES ('rick.riordan@gmail.com', 'mcta@cin.ufpe.br');
 INSERT INTO seguir (seguidor, seguido)
 VALUES ('john.green@gmail.com', 'mlmn3@cin.ufpe.br');
 
+
+-------- CURTIR  ----------
+INSERT INTO curtir (email_curte, email_publicou, cod_pub)
+VALUES ('ram3@cin.ufpe.br', 'rick.riordan@gmail.com', 1);
+
+INSERT INTO curtir (email_curte, email_publicou, cod_pub)
+VALUES ('ram3@cin.ufpe.br', 'john.green@gmail.com', 2);
+
+INSERT INTO curtir (email_curte, email_publicou, cod_pub)
+VALUES ('ram3@cin.ufpe.br', 'paula.pimenta@gmail.com', 3);
+
+INSERT INTO curtir (email_curte, email_publicou, cod_pub)
+VALUES ('lblp@cin.ufpe.br', 'rick.riordan@gmail.com', 1);
+
+INSERT INTO curtir (email_curte, email_publicou, cod_pub)
+VALUES ('mlmn3@cin.ufpe.br', 'rick.riordan@gmail.com', 1);
+
+INSERT INTO curtir (email_curte, email_publicou, cod_pub)
+VALUES ('pms5@cin.ufpe.br', 'jrco@cin.ufpe.br', 8);
+
+INSERT INTO curtir (email_curte, email_publicou, cod_pub)
+VALUES ('lblp@cin.ufpe.br', 'jrco@cin.ufpe.br', 8);
+
+INSERT INTO curtir (email_curte, email_publicou, cod_pub)
+VALUES ('john.green@gmail.com', 'jrco@cin.ufpe.br', 8);
+
+INSERT INTO curtir (email_curte, email_publicou, cod_pub)
+VALUES ('cristaldog@gmail.com', 'mlmn3@cin.ufpe.br', 10);
+
+INSERT INTO curtir (email_curte, email_publicou, cod_pub)
+VALUES ('mcta@cin.ufpe.br', 'mcta@cin.ufpe.br', 17);
