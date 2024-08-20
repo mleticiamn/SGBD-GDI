@@ -613,3 +613,180 @@ VALUES (15, 'Realismo');
 INSERT INTO generos (cod_obra, genero)
 VALUES (16, 'Mistério');
 
+
+-------- REFERENCIAR ---------
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (1,'rick.riordan@gmail.com', 1);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (2,'john.green@gmail.com', 2);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (3,'paula.pimenta@gmail.com', 3);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (4,'ram3@cin.ufpe.br', 4);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (5,'lblp@cin.ufpe.br', 5);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (6,'pms5@cin.ufpe.br', 6);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (7,'mcta@cin.ufpe.br', 7);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (8,'jrco@cin.ufpe.br', 8);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (9,'mlmn3@cin.ufpe.br' , 10);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (10,'ram3@cin.ufpe.br' , 14);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (11,'lblp@cin.ufpe.br' , 15);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (12,'pms5@cin.ufpe.br' , 16);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (13,'mcta@cin.ufpe.br' , 17);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (14,'jrco@cin.ufpe.br' , 18);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (15,'gmsmr@cin.ufpe.br' , 19);
+
+INSERT INTO
+    referenciar (cod_obra, email, cod_pub)
+VALUES (16,'mlmn3@cin.ufpe.br' , 20);
+
+------- COMENTARIO --------
+CREATE SEQUENCE seq_cod_com
+START WITH 1
+INCREMENT BY 1;
+
+INSERT INTO comentario (email, cod_pub, cod_com, conteudo)
+VALUES ('gmsmr@cin.ufpe.br', 9, seq_cod_com.NEXTVAL, 'Que tal começar a ler Desventuras em Série? A saga é grande, mas cada livro é curto.');
+
+INSERT INTO comentario (email, cod_pub, cod_com, conteudo)
+VALUES ('gmsmr@cin.ufpe.br', 9, seq_cod_com.NEXTVAL, 'Tem alguns contos legais de Edgar Allan Poe que são curtos');
+
+INSERT INTO comentario (email, cod_pub, cod_com, conteudo)
+VALUES ('john.green@gmail.com', 12, seq_cod_com.NEXTVAL, 'Que tal algo com redes sociais?');
+
+INSERT INTO comentario (email, cod_pub, cod_com, conteudo)
+VALUES ('john.green@gmail.com', 12, seq_cod_com.NEXTVAL, 'Sem ideias no momento...');
+
+INSERT INTO comentario (email, cod_pub, cod_com, conteudo)
+VALUES ('mcta@cin.ufpe.br', 17, seq_cod_com.NEXTVAL, 'Simplesmente magnífico! Adoro');
+
+INSERT INTO comentario (email, cod_pub, cod_com, conteudo)
+VALUES ('mcta@cin.ufpe.br', 17, seq_cod_com.NEXTVAL, 'é um clássico, mas não sou fã..');
+
+INSERT INTO comentario (email, cod_pub, cod_com, conteudo)
+VALUES ('mlmn3@cin.ufpe.br', 20, seq_cod_com.NEXTVAL, 'Não darei spoilers, mas o final é bem interessante');
+
+
+--------- COMENTAR --------
+
+
+--------- SEGUIR --------
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('ram3@cin.ufpe.br', 'jane.austen@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('lblp@cin.ufpe.br', 'jane.austen@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('pms5@cin.ufpe.br', 'jane.austen@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('rick.riordan@gmail.com', 'jane.austen@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('paula.pimenta@gmail.com', 'jane.austen@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('mlmn3@cin.ufpe.br', 'jane.austen@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('gmsmr@cin.ufpe.br', 'jane.austen@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('gmsmr@cin.ufpe.br', 'mlmn3@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('mcta@cin.ufpe.br', 'mlmn3@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('mlmn3@cin.ufpe.br', 'gmsmr@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('mcta@cin.ufpe.br', 'gmsmr@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('mlmn3@cin.ufpe.br', 'mcta@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('gmsmr@cin.ufpe.br', 'mcta@cin.ufpe.br');
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('ram3@cin.ufpe.br', 'lblp@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('pms5@cin.ufpe.br', 'lblp@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('rick.riordan@gmail.com', 'pms5@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('john.green@gmail.com', 'rick.riordan@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('paula.pimenta@gmail.com', 'machado.de.assis@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('mlmn3@cin.ufpe.br', 'machado.de.assis@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('gmsmr@cin.ufpe.br', 'machado.de.assis@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('mcta@cin.ufpe.br', 'machado.de.assis@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('jrco@cin.ufpe.br', 'paula.pimenta@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('ram3@cin.ufpe.br', 'jrco@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('cristaldog@gmail.com', 'ram3@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('jane.austen@gmail.com', 'cristaldog@gmail.com');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('rick.riordan@gmail.com', 'mcta@cin.ufpe.br');
+
+INSERT INTO seguir (seguidor, seguido)
+VALUES ('john.green@gmail.com', 'mlmn3@cin.ufpe.br');
+
