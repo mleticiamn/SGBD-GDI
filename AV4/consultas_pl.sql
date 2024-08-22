@@ -1,5 +1,5 @@
 /* Calcula e exibe a quantidade de seguidores de cada usuário na plataforma, exibindo também a média de seguidores por usuário. 
-O resultado inclui o email, o nome completo e a quantidade de seguidores de cada usuário. */
+O resultado inclui o email, o nome completo e a quantidade de seguidores de cada usuário */
 DECLARE
     v_email usuario.email%TYPE;
     v_nome usuario.nome%TYPE;
@@ -41,7 +41,7 @@ END;
 /
 
 /* Exibe todas as publicações na plataforma, incluindo detalhes como o email do autor, o código da publicação, o conteúdo, a data de publicação, e o nome completo do autor. 
-Cada publicação é exibida com um separador para melhor legibilidade. */
+Cada publicação é exibida com um separador para melhor legibilidade */
 CREATE OR REPLACE FUNCTION listar_publicacoes
 RETURN SYS_REFCURSOR
 IS
@@ -89,7 +89,7 @@ END;
 
 /* Verifica a atividade de um usuário com base no número de publicações. Se o usuário tiver mais de 10 publicações, é 
 considerado ativo. Já se ele tem entre 5 e 10 publicações, é considerado moderado. Por fim, se ele tiver menos de 5 
-publicações, ele é considerado inativo. */
+publicações, ele é considerado inativo */
 CREATE OR REPLACE FUNCTION verificar_atividade_usuario (p_email IN VARCHAR2)
 RETURN VARCHAR2
 IS
@@ -164,7 +164,7 @@ END;
 /
     
 /* Calcula e exibe a quantidade de telefones que cada usuário possui na plataforma, incluindo o email do usuário e o número 
-dos telefones associados. Além disso, no fim, o resultado é exibido de forma ordenada pelo email do usuário. */
+dos telefones associados. Além disso, no fim, o resultado é exibido de forma ordenada pelo email do usuário */
 CREATE OR REPLACE PACKAGE UsuarioTelefone_Package AS
     TYPE RefCursor IS REF CURSOR;
     PROCEDURE ListarUsuariosETelefones(p_cursor OUT RefCursor);
@@ -202,7 +202,7 @@ BEGIN
 END;
 /
 
-/* Exibe informações de todos os usuários da tabela usuario, incluindo email, nome, sobrenome e data de nascimento. */
+-- Exibe informações de todos os usuários da tabela usuario, incluindo email, nome, sobrenome e data de nascimento
 DECLARE
     v_usuario usuario%ROWTYPE;
     CURSOR usuario_cursor IS
