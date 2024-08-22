@@ -87,3 +87,39 @@ BEGIN
 END;
 /
 
+/* Verifica a atividade de um usuário com base no número de publicações. Se o usuário tiver mais de 10 publicações, é 
+considerado ativo. Já se ele tem entre 5 e 10 publicações, é considerado moderado. Por fim, se ele tiver menos de 5 
+publicações, ele é considerado inativo. */
+CREATE OR REPLACE FUNCTION verificar_atividade_usuario (p_email IN VARCHAR2)
+RETURN VARCHAR2
+IS
+    v_num_pub NUMBER;
+    v_mensagem VARCHAR2(50);
+BEGIN
+    SELECT COUNT(*) INTO v_num_pub FROM publicacao
+    WHERE email = p_email;
+
+    IF v_num_pub > 10 THEN
+        v_mensagem := 'Usuário ativo';
+    ELSIF v_num_pub BETWEEN 5 AND 10 THEN
+        v_mensagem := 'Usuário moderado';
+    ELSE
+        v_mensagem := 'Usuário inativo';
+    END IF;
+
+    RETURN v_mensagem;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        RETURN 'Erro inesperado: ' || SQLERRM;
+END;
+/
+
+DECLARE
+    v_email VARCHAR2(50) := 'pms5@cin.ufpe.br';
+    v_mensagem VARCHAR2(50);
+BEGIN
+    v_mensagem := verificar_atividade_usuario(v_email);
+    DBMS_OUTPUT.PUT_LINE('Atividade do usuário: ' || v_mensagem);
+END;
+/
