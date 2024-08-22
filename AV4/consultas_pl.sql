@@ -162,3 +162,43 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Classificação do usuário: ' || v_classificacao);
 END;
 /
+    
+/* Calcula e exibe a quantidade de telefones que cada usuário possui na plataforma, incluindo o email do usuário e o número 
+dos telefones associados. Além disso, no fim, o resultado é exibido de forma ordenada pelo email do usuário. */
+CREATE OR REPLACE PACKAGE UsuarioTelefone_Package AS
+    TYPE RefCursor IS REF CURSOR;
+    PROCEDURE ListarUsuariosETelefones(p_cursor OUT RefCursor);
+END UsuarioTelefone_Package;
+/
+
+CREATE OR REPLACE PACKAGE BODY UsuarioTelefone_Package AS
+    PROCEDURE ListarUsuariosETelefones(p_cursor OUT RefCursor) IS
+    BEGIN
+        OPEN p_cursor FOR
+            SELECT u.email, t.telefone FROM usuario u
+            LEFT JOIN telefones t ON u.email = t.email
+            ORDER BY u.email;
+    END ListarUsuariosETelefones;
+END UsuarioTelefone_Package;
+/
+
+DECLARE
+    v_cursor UsuarioTelefone_Package.RefCursor;
+    v_email usuario.email%TYPE;
+    v_telefone telefones.telefone%TYPE;
+BEGIN
+    UsuarioTelefone_Package.ListarUsuariosETelefones(p_cursor => v_cursor);
+    
+    -- Loop para processar cada linha do cursor
+    LOOP
+        FETCH v_cursor INTO v_email, v_telefone;
+        EXIT WHEN v_cursor%NOTFOUND;
+        
+        DBMS_OUTPUT.PUT_LINE('Email: ' || v_email);
+        DBMS_OUTPUT.PUT_LINE('Telefone: ' || NVL(v_telefone, 'Nenhum telefone'));
+        DBMS_OUTPUT.PUT_LINE('-------------------------');
+    END LOOP;
+    
+    CLOSE v_cursor;
+END;
+/
