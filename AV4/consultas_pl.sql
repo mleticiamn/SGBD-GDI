@@ -39,3 +39,51 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Média de Seguidores por Usuário: ' || v_media_seguidores);
 END;
 /
+
+/* Exibe todas as publicações na plataforma, incluindo detalhes como o email do autor, o código da publicação, o conteúdo, a data de publicação, e o nome completo do autor. 
+Cada publicação é exibida com um separador para melhor legibilidade. */
+CREATE OR REPLACE FUNCTION listar_publicacoes
+RETURN SYS_REFCURSOR
+IS
+    v_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN v_cursor FOR
+        SELECT p.email, p.cod_pub, p.conteudo, p.data_pub, a.nome, u.sobrenome FROM publicacao p
+        JOIN usuario a ON p.email = a.email
+        JOIN usuario u ON p.email = u.email;
+
+    RETURN v_cursor;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Erro inesperado: ' || SQLERRM);
+        RETURN NULL;
+END;
+/
+
+DECLARE
+    v_cursor SYS_REFCURSOR;
+    v_email VARCHAR2(50);
+    v_cod_pub NUMBER;
+    v_conteudo VARCHAR2(700);
+    v_data_pub DATE;
+    v_nome VARCHAR2(50);
+    v_sobrenome VARCHAR2(50);
+BEGIN
+    v_cursor := listar_publicacoes;
+    
+    LOOP
+        FETCH v_cursor INTO v_email, v_cod_pub, v_conteudo, v_data_pub, v_nome, v_sobrenome;
+        EXIT WHEN v_cursor%NOTFOUND;
+        
+        DBMS_OUTPUT.PUT_LINE('Usuário(a): ' || v_nome || ' ' || v_sobrenome);
+        DBMS_OUTPUT.PUT_LINE('Código da Publicação: ' || v_cod_pub);
+        DBMS_OUTPUT.PUT_LINE('Conteúdo: ' || v_conteudo);
+        DBMS_OUTPUT.PUT_LINE('Data de Publicação: ' || TO_CHAR(v_data_pub, 'DD/MM/YYYY'));
+        DBMS_OUTPUT.PUT_LINE(' ' || ' ');
+    END LOOP;
+    
+    CLOSE v_cursor;
+END;
+/
+
