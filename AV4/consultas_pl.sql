@@ -123,3 +123,42 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Atividade do usuário: ' || v_mensagem);
 END;
 /
+
+/* Calcula e exibe a classificação de cada usuário com base no número de seguidores em lotes. A classificação do usuário pode ser
+influente, popular ou  novato */
+CREATE OR REPLACE PROCEDURE classificar_usuario (
+    p_email IN VARCHAR2,
+    p_lote IN NUMBER,
+    p_result OUT VARCHAR2
+)
+IS
+    v_total_seguidores NUMBER := 0;
+    v_count NUMBER := 0;
+BEGIN
+    SELECT COUNT(*) INTO v_count FROM seguir
+    WHERE seguido = p_email;
+
+    WHILE v_total_seguidores < v_count LOOP
+        v_total_seguidores := v_total_seguidores + LEAST(v_count - v_total_seguidores, p_lote);
+    END LOOP;
+
+    p_result := CASE
+                   WHEN v_total_seguidores > 10 THEN 'Influente'
+                   WHEN v_total_seguidores BETWEEN 5 AND 10 THEN 'Popular'
+                   ELSE 'Novato'
+                END;
+END;
+/
+
+DECLARE
+    v_classificacao VARCHAR2(50);
+BEGIN
+    classificar_usuario(
+        p_email => 'jane.austen@gmail.com',
+        p_lote => 1,
+        p_result => v_classificacao
+    );
+
+    DBMS_OUTPUT.PUT_LINE('Classificação do usuário: ' || v_classificacao);
+END;
+/
