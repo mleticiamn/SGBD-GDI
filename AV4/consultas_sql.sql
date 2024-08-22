@@ -16,3 +16,12 @@ WHERE seguidor = 'rick.riordan@gmail.com' AND seguido = 'jane.austen@gmail.com';
 -- Seleciona todos os usuários que seguem Paula Pimenta, Rick Riordan ou Machado de Assis
 SELECT * FROM seguir
 WHERE seguido IN ('paula.pimenta@gmail.com', 'rick.riordan@gmail.com', 'machado.de.assis@gmail.com');
+
+-- Seleciona a média de postagens de cada usuário a partir da seleção do número de publicações de cada usuário 
+SELECT Email, AVG(Postagens) AS MediaPostagens
+FROM (
+    SELECT Email, COUNT(*) AS Postagens
+    FROM Publicacao
+    GROUP BY Email
+) AS Subconsulta
+GROUP BY Email;
