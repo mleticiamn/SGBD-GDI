@@ -217,3 +217,74 @@ BEGIN
     END LOOP;
 END;
 /
+
+CREATE TABLE obra (
+    cod_obra NUMBER PRIMARY KEY,
+    titulo VARCHAR2(50),
+    email_cad VARCHAR2(50)
+);
+
+CREATE TABLE comentario (
+    email VARCHAR2(50),
+    cod_pub NUMBER,
+    cod_com NUMBER,
+    conteudo VARCHAR2(100),
+    CONSTRAINT comentario_pkey PRIMARY KEY (email, cod_pub, cod_com)
+);
+
+CREATE TABLE historico_comentario (
+    email VARCHAR2(50),
+    cod_pub NUMBER,
+    cod_com NUMBER,
+    acao VARCHAR2(20),
+    data_acesso DATE
+);
+
+CREATE OR REPLACE TRIGGER trg_comentario
+AFTER INSERT OR UPDATE ON comentario
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        INSERT INTO historico_comentario (email, cod_pub, cod_com, acao, data_acesso)
+        VALUES (:NEW.email, :NEW.cod_pub, :NEW.cod_com, 'Inserido', SYSDATE);
+    ELSIF UPDATING THEN
+        INSERT INTO historico_comentario (email, cod_pub, cod_com, acao, data_acesso)
+        VALUES (:NEW.email, :NEW.cod_pub, :NEW.cod_com, 'Atualizado', SYSDATE);
+    END IF;
+END;
+/
+
+DECLARE
+    TYPE t_comentario_rec IS RECORD (
+        email     comentario.email%TYPE,
+        cod_pub   comentario.cod_pub%TYPE,
+        cod_com   comentario.cod_com%TYPE,
+        conteudo  comentario.conteudo%TYPE
+    );
+
+    TYPE t_comentario_table IS TABLE OF t_comentario_rec;
+    v_comentarios t_comentario_table;
+
+    v_comentario_record t_comentario_rec;
+
+BEGIN
+    INSERT INTO comentario (email, cod_pub, cod_com, conteudo)
+    VALUES ('user1@example.com', 101, 1, 'Excelente obra!');
+
+    INSERT INTO comentario (email, cod_pub, cod_com, conteudo)
+    VALUES ('user2@example.com', 102, 2, 'Muito interessante.');
+
+    SELECT email, cod_pub, cod_com, conteudo
+    BULK COLLECT INTO v_comentarios
+    FROM comentario;
+
+    FOR i IN 1 .. v_comentarios.COUNT LOOP
+        v_comentario_record := v_comentarios(i);
+        DBMS_OUTPUT.PUT_LINE('Email: ' || v_comentario_record.email);
+        DBMS_OUTPUT.PUT_LINE('Código da Publicação: ' || v_comentario_record.cod_pub);
+        DBMS_OUTPUT.PUT_LINE('Código do Comentário: ' || v_comentario_record.cod_com);
+        DBMS_OUTPUT.PUT_LINE('Conteúdo: ' || v_comentario_record.conteudo);
+        DBMS_OUTPUT.PUT_LINE('-------------------------');
+    END LOOP;
+END;
+/
