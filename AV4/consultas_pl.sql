@@ -201,3 +201,19 @@ BEGIN
     CLOSE v_cursor;
 END;
 /
+
+/* Exibe informações de todos os usuários da tabela usuario, incluindo email, nome, sobrenome e data de nascimento. */
+DECLARE
+    v_usuario usuario%ROWTYPE;
+    CURSOR usuario_cursor IS
+        SELECT * FROM usuario;
+BEGIN
+    FOR v_usuario IN usuario_cursor LOOP
+        DBMS_OUTPUT.PUT_LINE('Email: ' || v_usuario.email);
+        DBMS_OUTPUT.PUT_LINE('Nome: ' || v_usuario.nome);
+        DBMS_OUTPUT.PUT_LINE('Sobrenome: ' || v_usuario.sobrenome);
+        DBMS_OUTPUT.PUT_LINE('Data de Nascimento: ' || TO_CHAR(v_usuario.data_nasc, 'DD/MM/YYYY'));
+        DBMS_OUTPUT.PUT_LINE(' ' || ' ');
+    END LOOP;
+END;
+/
