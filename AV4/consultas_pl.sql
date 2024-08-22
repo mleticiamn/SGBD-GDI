@@ -189,7 +189,6 @@ DECLARE
 BEGIN
     UsuarioTelefone_Package.ListarUsuariosETelefones(p_cursor => v_cursor);
     
-    -- Loop para processar cada linha do cursor
     LOOP
         FETCH v_cursor INTO v_email, v_telefone;
         EXIT WHEN v_cursor%NOTFOUND;
