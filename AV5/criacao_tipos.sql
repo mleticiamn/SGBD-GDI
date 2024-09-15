@@ -1,4 +1,3 @@
--- Ainda vou adicionar todos os métodos
 -- TIPO TELEFONE
 CREATE OR REPLACE TYPE tp_telefones AS OBJECT(
     numero VARCHAR2 (11)
