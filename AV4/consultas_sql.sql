@@ -23,7 +23,7 @@ FROM (
     SELECT Email, COUNT(*) AS Postagens
     FROM Publicacao
     GROUP BY Email
-) AS Subconsulta
+) Subconsulta
 GROUP BY Email;
 
 
