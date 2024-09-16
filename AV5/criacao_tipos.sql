@@ -44,9 +44,15 @@ CREATE OR REPLACE TYPE BODY tp_usuario AS
     BEGIN
         DBMS_OUTPUT.PUT_LINE('Email: ' || SELF.email);
         DBMS_OUTPUT.PUT_LINE('Data de nascimento: ' || SELF.data_nasc);
-        FOR i IN 1..SELF.lista_telefones. COUNT LOOP
-            DBMS_OUTPUT.PUT_LINE('Telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
-        END LOOP;
+
+	IF SELF.lista_telefones IS NOT NULL THEN
+            FOR i IN 1..SELF.lista_telefones.COUNT LOOP
+                DBMS_OUTPUT.PUT_LINE('Telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
+            END LOOP;
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('Sem telefones.');
+        END IF;
+
 	DBMS_OUTPUT.PUT_LINE('Nome completo: ' || SELF.nome_completo.nome || ' ' || SELF.nome_completo.sobrenome);
     END
 
@@ -60,11 +66,11 @@ END;
 	
 -- TIPO PREMIOS
 CREATE OR REPLACE TYPE tp_premios AS OBJECT(
-    premio VARCHAR2(20)
+    premio VARCHAR2(50)
 );
 /
 	
--- NESTED PREMIO
+-- NESTED TABLE PREMIO
 CREATE OR REPLACE TYPE tp_nt_premios AS TABLE OF tp_premios;
 /
 	
@@ -82,10 +88,14 @@ CREATE OR REPLACE TYPE BODY tp_autor AS
     BEGIN
         DBMS_OUTPUT.PUT_LINE('Email: ' || SELF.email);
         DBMS_OUTPUT.PUT_LINE('Data de nascimento: ' || SELF.data_nasc);
-        
-        FOR i IN 1..SELF.lista_telefones. COUNT LOOP
-            DBMS_OUTPUT.PUT_LINE('Telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
-        END LOOP;
+
+	IF SELF.lista_telefones IS NOT NULL THEN
+            FOR i IN 1..SELF.lista_telefones.COUNT LOOP
+                DBMS_OUTPUT.PUT_LINE('Telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
+            END LOOP;
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('Sem telefones.');
+        END IF;
 
 	DBMS_OUTPUT.PUT_LINE('Nome completo: ' || SELF.nome_completo.nome || ' ' || SELF.nome_completo.sobrenome);
 
