@@ -33,7 +33,7 @@ CREATE TABLE publicacao (
     cod_pub NUMBER,
     conteudo VARCHAR2(700) NOT NULL,
     data_pub DATE NOT NULL,
-    CONSTRAINT publicacao_pkey PRIMARY KEY (email, cod_pub)
+    CONSTRAINT publicacao_pkey PRIMARY KEY (email, cod_pub),
     CONSTRAINT publicacao_usuario_fkey FOREIGN KEY (email) REFERENCES usuario (email)
 );
     
@@ -89,7 +89,8 @@ CREATE TABLE comentario (
     cod_pub NUMBER,
     cod_com NUMBER,
     conteudo VARCHAR2(100),
-    CONSTRAINT comentario_pkey PRIMARY KEY (email, cod_pub, cod_com)
+    CONSTRAINT comentario_pkey PRIMARY KEY (email, cod_pub, cod_com),
+    CONSTRAINT comentario_pub_fkey FOREIGN KEY (email, cod_pub) REFERENCES publicacao (email, cod_ub)
 );
 
 CREATE TABLE comentar (
