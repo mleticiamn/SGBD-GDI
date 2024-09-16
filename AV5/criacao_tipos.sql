@@ -102,7 +102,7 @@ CREATE OR REPLACE TYPE tp_publicacao AS OBJECT(
   	data_pub DATE
 );
 /
--- TPO USUARIO-PUBLICACAO
+-- TIPO USUARIO-PUBLICACAO
 CREATE OR REPLACE TYPE tp_usuario_pub AS OBJECT(
 	email REF tp_usuario,
   	cod_pub REF tp_publicacao
@@ -144,7 +144,7 @@ CREATE OR REPLACE TYPE BODY tp_obra AS
         RETURN SELF.lista_autores.COUNT;
     END;
 
-    MEMBER FUNCTION compare_titulo (x tp_obra) RETURN NUMBER IS
+    ORDER MEMBER FUNCTION compare_titulo (x tp_obra) RETURN NUMBER IS
     BEGIN
         IF SELF.titulo < x.titulo THEN
             RETURN -1;
@@ -158,11 +158,11 @@ END;
 /
 -- TIPO SINOPSES
 CREATE OR REPLACE TYPE tp_sinopses AS OBJECT(
-  	obra REF tp_obra,
+  	cod_obra REF tp_obra,
 	sinopse VARCHAR2(400)
 );
 /
--- TIPO REFERENCIAR   
+-- TIPO REFERENCIAR
 CREATE OR REPLACE TYPE tp_referenciar AS OBJECT(
 	cod_obra REF tp_obra,
   	email REF tp_usuario_pub,
