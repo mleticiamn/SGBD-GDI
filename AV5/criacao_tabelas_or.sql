@@ -1,8 +1,7 @@
 -- TABELA USUÁRIO
 CREATE TABLE tb_usuario OF tp_usuario(
     email PRIMARY KEY, 
-    nome NOT NULL,
-    sobrenome NOT NULL,
+    nome_completo NOT NULL,
     data_nasc NOT NULL,
     lista_telefones NOT NULL
 );

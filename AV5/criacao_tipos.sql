@@ -3,18 +3,26 @@ CREATE OR REPLACE TYPE tp_telefones AS OBJECT(
     numero VARCHAR2 (11)
 );
 /
+	
 -- TIPO VARRAY TELEFONE
 CREATE OR REPLACE TYPE va_tp_telefones AS VARRAY(3) OF tp_telefones;
 /
+
+-- TIPO NOME_COMPLETO
+CREATE OR REPLACE TYPE tp_nome_completo AS OBJECT(
+    nome VARCHAR2(50),
+    sobrenome VARCHAR2(50)
+);
+/
+	
 -- TIPO USUÁRIO
 CREATE OR REPLACE TYPE tp_usuario AS OBJECT(
     email VARCHAR2(50),
-    nome VARCHAR2(50),
-    sobrenome VARCHAR2(50),
     data_nasc DATE,
     lista_telefones va_tp_telefones,
+    nome_completo tp_nome_completo,
 
-    CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, nome VARCHAR2, sobrenome VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones) RETURN SELF AS RESULT,
+    CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones, nome_completo tp_nome_completo) RETURN SELF AS RESULT,
 
     MEMBER PROCEDURE print_info (SELF tp_usuario),
     FINAL MAP MEMBER FUNCTION qtdd_telefones RETURN NUMBER
@@ -23,25 +31,23 @@ CREATE OR REPLACE TYPE tp_usuario AS OBJECT(
 /
 
 CREATE OR REPLACE TYPE BODY tp_usuario AS
-    CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, nome VARCHAR2, sobrenome VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones) RETURN SELF AS RESULT IS
+    CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones, nome_completo tp_nome_completo) RETURN SELF AS RESULT IS
     BEGIN
         SELF.email := email;
-        SELF.nome := nome;
-        SELF.sobrenome := sobrenome;
         SELF.data_nasc := data_nasc;
         SELF.lista_telefones := lista_telefones;
+        SELF.nome_completo := nome_completo;
         RETURN SELF;
     END;
 
     MEMBER PROCEDURE print_info (SELF tp_usuario) IS
     BEGIN
-        DBMS_OUTPUT.PUT_LINE('email: ' || SELF.email);
-        DBMS_OUTPUT.PUT_LINE('nome: ' || SELF.nome);
-        DBMS_OUTPUT.PUT_LINE('sobrenome: ' || SELF.sobrenome);
-        DBMS_OUTPUT.PUT_LINE('data de nascimento: ' || SELF.data_nasc);
+        DBMS_OUTPUT.PUT_LINE('Email: ' || SELF.email);
+        DBMS_OUTPUT.PUT_LINE('Data de nascimento: ' || SELF.data_nasc);
         FOR i IN 1..SELF.lista_telefones. COUNT LOOP
-            DBMS_OUTPUT.PUT_LINE('telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
+            DBMS_OUTPUT.PUT_LINE('Telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
         END LOOP;
+	DBMS_OUTPUT.PUT_LINE('Nome completo: ' || SELF.nome_completo.nome || ' ' || SELF.nome_completo.sobrenome);
     END
 
     FINAL MAP MEMBER FUNCTION qtdd_telefones RETURN NUMBER IS
@@ -51,14 +57,17 @@ CREATE OR REPLACE TYPE BODY tp_usuario AS
 
 END;
 /
+	
 -- TIPO PREMIOS
 CREATE OR REPLACE TYPE tp_premios AS OBJECT(
     premio VARCHAR2(20)
 );
 /
+	
 -- NESTED PREMIO
 CREATE OR REPLACE TYPE tp_nt_premios AS TABLE OF tp_premios;
 /
+	
 -- TIPO AUTOR
 CREATE OR REPLACE TYPE tp_autor UNDER tp_usuario(
     biografia VARCHAR2(250),
@@ -71,16 +80,16 @@ CREATE OR REPLACE TYPE tp_autor UNDER tp_usuario(
 CREATE OR REPLACE TYPE BODY tp_autor AS
     OVERRIDING MEMBER PROCEDURE print_info (SELF tp_autor) IS
     BEGIN
-        DBMS_OUTPUT.PUT_LINE('email: ' || SELF.email);
-        DBMS_OUTPUT.PUT_LINE('nome: ' || SELF.nome);
-        DBMS_OUTPUT.PUT_LINE('sobrenome: ' || SELF.sobrenome);
-        DBMS_OUTPUT.PUT_LINE('data de nascimento: ' || SELF.data_nasc);
+        DBMS_OUTPUT.PUT_LINE('Email: ' || SELF.email);
+        DBMS_OUTPUT.PUT_LINE('Data de nascimento: ' || SELF.data_nasc);
         
         FOR i IN 1..SELF.lista_telefones. COUNT LOOP
-            DBMS_OUTPUT.PUT_LINE('telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
+            DBMS_OUTPUT.PUT_LINE('Telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
         END LOOP;
 
-        DBMS_OUTPUT.PUT_LINE('biografia: ' || SELF.biografia);
+	DBMS_OUTPUT.PUT_LINE('Nome completo: ' || SELF.nome_completo.nome || ' ' || SELF.nome_completo.sobrenome);
+
+        DBMS_OUTPUT.PUT_LINE('Biografia: ' || SELF.biografia);
 
         IF SELF.lista_premios IS NOT NULL AND SELF.lista_premios.COUNT > 0 THEN
             DBMS_OUTPUT.PUT_LINE('Prêmios:');
@@ -94,6 +103,7 @@ CREATE OR REPLACE TYPE BODY tp_autor AS
     END;
 END;
 /
+	
 -- TIPO PUBLICACAO
 CREATE OR REPLACE TYPE tp_publicacao AS OBJECT(
   	email REF tp_usuario,
@@ -108,22 +118,27 @@ CREATE OR REPLACE TYPE tp_usuario_pub AS OBJECT(
   	cod_pub REF tp_publicacao
 );
 /
+	
 -- TIPO AUTORES (DE UMA OBRA)
 CREATE OR REPLACE TYPE tp_autores AS OBJECT(
 	autor VARCHAR2(50)
 );
 /
+	
 -- NESTED AUTORES
 CREATE OR REPLACE TYPE tp_nt_autores AS TABLE OF tp_autores;
 /
+	
 -- TIPO GENEROS
 CREATE OR REPLACE TYPE tp_generos AS OBJECT(
     genero VARCHAR2(15)
 );
 /
+	
 -- TIPO VARRAY GENEROS
 CREATE OR REPLACE TYPE va_tp_generos AS VARRAY(3) OF tp_generos;
 /
+	
 -- TIPO OBRA
 CREATE OR REPLACE TYPE tp_obra AS OBJECT(
   	cod_obra NUMBER,
@@ -156,6 +171,7 @@ CREATE OR REPLACE TYPE BODY tp_obra AS
     END;
 END;
 /
+	
 -- TIPO SINOPSES
 CREATE OR REPLACE TYPE tp_sinopses AS OBJECT(
   	cod_obra REF tp_obra,
@@ -169,6 +185,7 @@ CREATE OR REPLACE TYPE tp_referenciar AS OBJECT(
   	cod_pub REF tp_usuario_pub
 );
 /
+	
 -- TIPO COMENTARIO
 CREATE OR REPLACE TYPE tp_comentario AS OBJECT(
   	email REF tp_publicacao,
@@ -177,6 +194,7 @@ CREATE OR REPLACE TYPE tp_comentario AS OBJECT(
   	conteudo VARCHAR2 (100)
 );
 /
+	
 -- TIPO COMENTAR
 CREATE OR REPLACE TYPE tp_comentar AS OBJECT(
 	email REF tp_usuario,
@@ -184,12 +202,14 @@ CREATE OR REPLACE TYPE tp_comentar AS OBJECT(
   	cod_com REF tp_comentario
 );
 /
+	
 -- TIPO SEGUIR
 CREATE OR REPLACE TYPE tp_seguir AS OBJECT(
 	seguidor REF tp_usuario,
   	seguido REF tp_usuario
 );
 /
+	
 -- TIPO CURTIR
 CREATE OR REPLACE TYPE tp_curtir AS OBJECT(
 	email_curte REF tp_usuario,
