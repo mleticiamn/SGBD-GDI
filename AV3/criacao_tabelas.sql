@@ -90,7 +90,7 @@ CREATE TABLE comentario (
     cod_com NUMBER,
     conteudo VARCHAR2(100),
     CONSTRAINT comentario_pkey PRIMARY KEY (email, cod_pub, cod_com),
-    CONSTRAINT comentario_pub_fkey FOREIGN KEY (email, cod_pub) REFERENCES publicacao (email, cod_ub)
+    CONSTRAINT comentario_pub_fkey FOREIGN KEY (email, cod_pub) REFERENCES publicacao (email, cod_pub)
 );
 
 CREATE TABLE comentar (
