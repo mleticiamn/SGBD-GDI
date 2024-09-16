@@ -34,7 +34,6 @@ CREATE TABLE tb_obra OF tp_obra(
 -- TABELA SINOPSES
 CREATE TABLE tb_sinopses OF tp_sinopses(
     sinopse PRIMARY KEY,
-    --cod_obra WITH ROWID REFERENCES tb_obra
     cod_obra SCOPE IS tb_obra
 );
 /
