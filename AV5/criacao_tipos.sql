@@ -3,9 +3,11 @@ CREATE OR REPLACE TYPE tp_telefones AS OBJECT(
     numero VARCHAR2 (11)
 );
 /
+	
 -- TIPO VARRAY TELEFONE
 CREATE OR REPLACE TYPE va_tp_telefones AS VARRAY(3) OF tp_telefones;
 /
+	
 -- TIPO USUÁRIO
 CREATE OR REPLACE TYPE tp_usuario AS OBJECT(
     email VARCHAR2(50),
@@ -51,14 +53,17 @@ CREATE OR REPLACE TYPE BODY tp_usuario AS
 
 END;
 /
+	
 -- TIPO PREMIOS
 CREATE OR REPLACE TYPE tp_premios AS OBJECT(
     premio VARCHAR2(20)
 );
 /
+	
 -- NESTED PREMIO
 CREATE OR REPLACE TYPE tp_nt_premios AS TABLE OF tp_premios;
 /
+	
 -- TIPO AUTOR
 CREATE OR REPLACE TYPE tp_autor UNDER tp_usuario(
     biografia VARCHAR2(250),
@@ -94,6 +99,7 @@ CREATE OR REPLACE TYPE BODY tp_autor AS
     END;
 END;
 /
+	
 -- TIPO PUBLICACAO
 CREATE OR REPLACE TYPE tp_publicacao AS OBJECT(
   	email REF tp_usuario,
@@ -102,28 +108,34 @@ CREATE OR REPLACE TYPE tp_publicacao AS OBJECT(
   	data_pub DATE
 );
 /
--- TPO USUARIO-PUBLICACAO
+	
+-- TIPO USUARIO-PUBLICACAO
 CREATE OR REPLACE TYPE tp_usuario_pub AS OBJECT(
 	email REF tp_usuario,
   	cod_pub REF tp_publicacao
 );
 /
+	
 -- TIPO AUTORES (DE UMA OBRA)
 CREATE OR REPLACE TYPE tp_autores AS OBJECT(
 	autor VARCHAR2(50)
 );
 /
+	
 -- NESTED AUTORES
 CREATE OR REPLACE TYPE tp_nt_autores AS TABLE OF tp_autores;
 /
+	
 -- TIPO GENEROS
 CREATE OR REPLACE TYPE tp_generos AS OBJECT(
     genero VARCHAR2(15)
 );
 /
+	
 -- TIPO VARRAY GENEROS
 CREATE OR REPLACE TYPE va_tp_generos AS VARRAY(3) OF tp_generos;
 /
+	
 -- TIPO OBRA
 CREATE OR REPLACE TYPE tp_obra AS OBJECT(
   	cod_obra NUMBER,
@@ -156,12 +168,14 @@ CREATE OR REPLACE TYPE BODY tp_obra AS
     END;
 END;
 /
+	
 -- TIPO SINOPSES
 CREATE OR REPLACE TYPE tp_sinopses AS OBJECT(
   	obra REF tp_obra,
 	sinopse VARCHAR2(400)
 );
 /
+	
 -- TIPO REFERENCIAR   
 CREATE OR REPLACE TYPE tp_referenciar AS OBJECT(
 	cod_obra REF tp_obra,
@@ -169,6 +183,7 @@ CREATE OR REPLACE TYPE tp_referenciar AS OBJECT(
   	cod_pub REF tp_usuario_pub
 );
 /
+	
 -- TIPO COMENTARIO
 CREATE OR REPLACE TYPE tp_comentario AS OBJECT(
   	email REF tp_publicacao,
@@ -177,6 +192,7 @@ CREATE OR REPLACE TYPE tp_comentario AS OBJECT(
   	conteudo VARCHAR2 (100)
 );
 /
+	
 -- TIPO COMENTAR
 CREATE OR REPLACE TYPE tp_comentar AS OBJECT(
 	email REF tp_usuario,
@@ -184,12 +200,14 @@ CREATE OR REPLACE TYPE tp_comentar AS OBJECT(
   	cod_com REF tp_comentario
 );
 /
+	
 -- TIPO SEGUIR
 CREATE OR REPLACE TYPE tp_seguir AS OBJECT(
 	seguidor REF tp_usuario,
   	seguido REF tp_usuario
 );
 /
+	
 -- TIPO CURTIR
 CREATE OR REPLACE TYPE tp_curtir AS OBJECT(
 	email_curte REF tp_usuario,
