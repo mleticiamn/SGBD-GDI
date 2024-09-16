@@ -184,46 +184,46 @@ END;
 	
 -- TIPO SINOPSES
 CREATE OR REPLACE TYPE tp_sinopses AS OBJECT(
-  	cod_obra REF tp_obra,
-	sinopse VARCHAR2(400)
+    cod_obra REF tp_obra,
+    sinopse VARCHAR2(400)
 );
 /
 -- TIPO REFERENCIAR
 CREATE OR REPLACE TYPE tp_referenciar AS OBJECT(
-	cod_obra REF tp_obra,
-  	email REF tp_usuario_pub,
-  	cod_pub REF tp_usuario_pub
+    cod_obra REF tp_obra,
+    email REF tp_usuario_pub,
+    cod_pub REF tp_usuario_pub
 );
 /
 	
 -- TIPO COMENTARIO
 CREATE OR REPLACE TYPE tp_comentario AS OBJECT(
-  	email REF tp_publicacao,
-	cod_pub REF tp_publicacao,
-  	cod_com NUMBER,
-  	conteudo VARCHAR2 (100)
+    email REF tp_publicacao,
+    cod_pub REF tp_publicacao,
+    cod_com NUMBER,
+    conteudo VARCHAR2 (100)
 );
 /
 	
 -- TIPO COMENTAR
 CREATE OR REPLACE TYPE tp_comentar AS OBJECT(
-	email REF tp_usuario,
-  	cod_pub REF tp_publicacao,
-  	cod_com REF tp_comentario
+    email REF tp_usuario,
+    cod_pub REF tp_publicacao,
+    cod_com REF tp_comentario
 );
 /
 	
 -- TIPO SEGUIR
 CREATE OR REPLACE TYPE tp_seguir AS OBJECT(
-	seguidor REF tp_usuario,
-  	seguido REF tp_usuario
+    seguidor REF tp_usuario,
+    seguido REF tp_usuario
 );
 /
 	
 -- TIPO CURTIR
 CREATE OR REPLACE TYPE tp_curtir AS OBJECT(
-	email_curte REF tp_usuario,
-  	email_publicou REF tp_usuario,
-  	cod_pub REF tp_publicacao
+    email_curte REF tp_usuario,
+    email_publicou REF tp_usuario,
+    cod_pub REF tp_publicacao
 );
 /
