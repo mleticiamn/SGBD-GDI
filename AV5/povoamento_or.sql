@@ -196,61 +196,61 @@ INSERT INTO tb_publicacao VALUES(
 
 -- INSERINDO NA TABELA USUARIO-PUBLICACAO
 
-INSERT INTO tb_usuario_pub (usuario_ref, publicacao_ref)
+INSERT INTO tb_usuario_pub (email, cod_pub)
 VALUES (
     (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'mlmn3@cin.ufpe.br'),
     (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 1)
 );
 
-INSERT INTO tb_usuario_pub (usuario_ref, publicacao_ref)
+INSERT INTO tb_usuario_pub (email, cod_pub)
 VALUES (
     (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'rick.riordan@gmail.com'),
     (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 2)
 );
 
-INSERT INTO tb_usuario_pub (usuario_ref, publicacao_ref)
+INSERT INTO tb_usuario_pub (email, cod_pub)
 VALUES (
     (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'jk.rowling@gmail.com'),
     (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 3)
 );
 
-INSERT INTO tb_usuario_pub (usuario_ref, publicacao_ref)
+INSERT INTO tb_usuario_pub (email, cod_pub)
 VALUES (
     (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'rick.riordan@gmail.com'),
     (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 4)
 );
 
-INSERT INTO tb_usuario_pub (usuario_ref, publicacao_ref)
+INSERT INTO tb_usuario_pub (email, cod_pub)
 VALUES (
     (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'jdsilva@cin.ufpe.br'),
     (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 5)
 );
 
-INSERT INTO tb_usuario_pub (usuario_ref, publicacao_ref)
+INSERT INTO tb_usuario_pub (email, cod_pub)
 VALUES (
     (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'anamaria@cin.ufpe.br'),
     (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 6)
 );
 
-INSERT INTO tb_usuario_pub (usuario_ref, publicacao_ref)
+INSERT INTO tb_usuario_pub (email, cod_pub)
 VALUES (
     (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'jdsilva@cin.ufpe.br'),
     (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 7)
 );
 
-INSERT INTO tb_usuario_pub (usuario_ref, publicacao_ref)
+INSERT INTO tb_usuario_pub (email, cod_pub)
 VALUES (
     (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'anamaria@cin.ufpe.br'),
     (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 8)
 );
 
-INSERT INTO tb_usuario_pub (usuario_ref, publicacao_ref)
+INSERT INTO tb_usuario_pub (email, cod_pub)
 VALUES (
     (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'lcosta@cin.ufpe.br'),
     (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 9)
 );
 
-INSERT INTO tb_usuario_pub (usuario_ref, publicacao_ref)
+INSERT INTO tb_usuario_pub (email, cod_pub)
 VALUES (
     (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'mlmn3@cin.ufpe.br'),
     (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 10)
