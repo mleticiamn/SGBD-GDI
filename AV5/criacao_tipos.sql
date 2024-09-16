@@ -18,9 +18,9 @@ CREATE OR REPLACE TYPE tp_nome_completo AS OBJECT(
 -- TIPO USUÁRIO
 CREATE OR REPLACE TYPE tp_usuario AS OBJECT(
     email VARCHAR2(50),
+    nome_completo tp_nome_completo,
     data_nasc DATE,
     lista_telefones va_tp_telefones,
-    nome_completo tp_nome_completo,
 
     CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones, nome_completo tp_nome_completo) RETURN SELF AS RESULT,
 
