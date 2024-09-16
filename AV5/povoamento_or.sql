@@ -55,7 +55,7 @@ INSERT INTO tb_usuario VALUES(
 );
 /
 
--- INSERINDO AUTORES
+-- INSERINDO NA TABELA AUTOR
 INSERT INTO tb_autor VALUES(
     tp_autor(
         'rick.riordan@gmail.com',
@@ -107,5 +107,89 @@ INSERT INTO tb_autor VALUES(
             tp_premios('Nebula Award for Best Novella')
         )
     )
+);
+/
+
+-- CRIANDO SEQUẼNCIA PARA COD_PUB
+CREATE SEQUENCE seq_cod_pub INCREMENT BY 1 START WITH 1;
+/
+-- INSERINDO PUBLICAÇÕES
+INSERT INTO tb_publicacao VALUES(
+    (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'mlmn3@cin.ufpe.br'),
+    seq_cod_pub.NEXTVAL,
+    'Ontem li it ends with us, não gostei! achei muito ruim',
+    '06-11-2023'
+);
+/
+
+INSERT INTO tb_publicacao VALUES(
+    (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'rick.riordan@gmail.com'),
+    seq_cod_pub.NEXTVAL,
+    'Percy Jackson e o Ladrão de Raios é uma introdução épica ao mundo dos semideuses.',
+    '23-02-2024'
+);
+/
+
+INSERT INTO tb_publicacao VALUES(
+    (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'jk.rowling@gmail.com'),
+    seq_cod_pub.NEXTVAL,
+    'Pensando em escrever algo novo. Alguma sugestão de tema?',
+    '24-02-2024'
+);
+/
+
+INSERT INTO tb_publicacao VALUES(
+    (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'rick.riordan@gmail.com'),
+    seq_cod_pub.NEXTVAL,
+    'Estou trabalhando no próximo livro do universo Percy Jackson. Fiquem atentos!',
+    '23-02-2024'
+);
+/
+
+INSERT INTO tb_publicacao VALUES(
+    (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'jdsilva@cin.ufpe.br'),
+    seq_cod_pub.NEXTVAL,
+    'Moby Dick é uma aventura intensa e filosófica em busca de uma baleia branca.',
+    '01-03-2024'
+);
+/
+
+INSERT INTO tb_publicacao VALUES(
+    (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'anamaria@cin.ufpe.br'),
+    seq_cod_pub.NEXTVAL,
+    'Jane Eyre é um romance fascinante, abordando temas como independência e moralidade.',
+    '11-03-2024'
+);
+/
+
+INSERT INTO tb_publicacao VALUES(
+    (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'jdsilva@cin.ufpe.br'),
+    seq_cod_pub.NEXTVAL,
+    'Relendo "O Grande Gatsby". A crítica social é mais relevante do que nunca.',
+    '20-03-2024'
+);
+/
+
+INSERT INTO tb_publicacao VALUES(
+    (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'anamaria@cin.ufpe.br'),
+    seq_cod_pub.NEXTVAL,
+    'Alguém já leu "O Morro dos Ventos Uivantes"? O que acharam?',
+    '23-03-2024'
+);
+/
+
+INSERT INTO tb_publicacao VALUES(
+    (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'lcosta@cin.ufpe.br'),
+    seq_cod_pub.NEXTVAL,
+    'Li "Crime e Castigo". Um mergulho profundo na mente humana.',
+    '05-04-2024'
+);
+/
+
+INSERT INTO tb_publicacao VALUES(
+    (SELECT REF(E) FROM tb_usuario E WHERE E.email = 'mlmn3@cin.ufpe.br'),
+    seq_cod_pub.NEXTVAL,
+    'Estou lendo "Morte no Nilo" de Agatha Christie. Estou intrigada até agora.',
+    '07-04-2024'
 );
 /
