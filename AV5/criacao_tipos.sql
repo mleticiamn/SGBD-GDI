@@ -7,16 +7,22 @@ CREATE OR REPLACE TYPE tp_telefones AS OBJECT(
 -- TIPO VARRAY TELEFONE
 CREATE OR REPLACE TYPE va_tp_telefones AS VARRAY(3) OF tp_telefones;
 /
+
+-- TIPO NOME_COMPLETO
+CREATE OR REPLACE TYPE tp_nome_completo AS OBJECT(
+    nome VARCHAR2(50),
+    sobrenome VARCHAR2(50),
+);
+/
 	
 -- TIPO USUÁRIO
 CREATE OR REPLACE TYPE tp_usuario AS OBJECT(
     email VARCHAR2(50),
-    nome VARCHAR2(50),
-    sobrenome VARCHAR2(50),
     data_nasc DATE,
     lista_telefones va_tp_telefones,
+    nome_completo tp_nome_completo,
 
-    CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, nome VARCHAR2, sobrenome VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones) RETURN SELF AS RESULT,
+    CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones, nome_completo tp_nome_completo) RETURN SELF AS RESULT,
 
     MEMBER PROCEDURE print_info (SELF tp_usuario),
     FINAL MAP MEMBER FUNCTION qtdd_telefones RETURN NUMBER
@@ -25,25 +31,23 @@ CREATE OR REPLACE TYPE tp_usuario AS OBJECT(
 /
 
 CREATE OR REPLACE TYPE BODY tp_usuario AS
-    CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, nome VARCHAR2, sobrenome VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones) RETURN SELF AS RESULT IS
+    CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones, nome_completo tp_nome_completo) RETURN SELF AS RESULT IS
     BEGIN
         SELF.email := email;
-        SELF.nome := nome;
-        SELF.sobrenome := sobrenome;
         SELF.data_nasc := data_nasc;
         SELF.lista_telefones := lista_telefones;
+        SELF.nome_completo := nome_completo;
         RETURN SELF;
     END;
 
     MEMBER PROCEDURE print_info (SELF tp_usuario) IS
     BEGIN
-        DBMS_OUTPUT.PUT_LINE('email: ' || SELF.email);
-        DBMS_OUTPUT.PUT_LINE('nome: ' || SELF.nome);
-        DBMS_OUTPUT.PUT_LINE('sobrenome: ' || SELF.sobrenome);
-        DBMS_OUTPUT.PUT_LINE('data de nascimento: ' || SELF.data_nasc);
+        DBMS_OUTPUT.PUT_LINE('Email: ' || SELF.email);
+        DBMS_OUTPUT.PUT_LINE('Data de nascimento: ' || SELF.data_nasc);
         FOR i IN 1..SELF.lista_telefones. COUNT LOOP
-            DBMS_OUTPUT.PUT_LINE('telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
+            DBMS_OUTPUT.PUT_LINE('Telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
         END LOOP;
+	DBMS_OUTPUT.PUT_LINE('Nome completo: ' || SELF.nome_completo.nome || ' ' || SELF.nome_completo.sobrenome);
     END
 
     FINAL MAP MEMBER FUNCTION qtdd_telefones RETURN NUMBER IS
@@ -76,16 +80,16 @@ CREATE OR REPLACE TYPE tp_autor UNDER tp_usuario(
 CREATE OR REPLACE TYPE BODY tp_autor AS
     OVERRIDING MEMBER PROCEDURE print_info (SELF tp_autor) IS
     BEGIN
-        DBMS_OUTPUT.PUT_LINE('email: ' || SELF.email);
-        DBMS_OUTPUT.PUT_LINE('nome: ' || SELF.nome);
-        DBMS_OUTPUT.PUT_LINE('sobrenome: ' || SELF.sobrenome);
-        DBMS_OUTPUT.PUT_LINE('data de nascimento: ' || SELF.data_nasc);
+        DBMS_OUTPUT.PUT_LINE('Email: ' || SELF.email);
+        DBMS_OUTPUT.PUT_LINE('Data de nascimento: ' || SELF.data_nasc);
         
         FOR i IN 1..SELF.lista_telefones. COUNT LOOP
-            DBMS_OUTPUT.PUT_LINE('telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
+            DBMS_OUTPUT.PUT_LINE('Telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
         END LOOP;
 
-        DBMS_OUTPUT.PUT_LINE('biografia: ' || SELF.biografia);
+	DBMS_OUTPUT.PUT_LINE('Nome completo: ' || SELF.nome_completo.nome || ' ' || SELF.nome_completo.sobrenome);
+
+        DBMS_OUTPUT.PUT_LINE('Biografia: ' || SELF.biografia);
 
         IF SELF.lista_premios IS NOT NULL AND SELF.lista_premios.COUNT > 0 THEN
             DBMS_OUTPUT.PUT_LINE('Prêmios:');
