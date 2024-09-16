@@ -34,6 +34,7 @@ CREATE TABLE publicacao (
     conteudo VARCHAR2(700) NOT NULL,
     data_pub DATE NOT NULL,
     CONSTRAINT publicacao_pkey PRIMARY KEY (email, cod_pub)
+    CONSTRAINT publicacao_usuario_fkey FOREIGN KEY (email) REFERENCES usuario (email)
 );
     
 CREATE TABLE usuario_publicacao (
