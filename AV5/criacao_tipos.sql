@@ -58,7 +58,7 @@ CREATE OR REPLACE TYPE BODY tp_usuario AS
 
     FINAL MAP MEMBER FUNCTION qtdd_telefones RETURN NUMBER IS
     BEGIN
-            RETURN SELF.lista_telefones.COUNT;
+        RETURN SELF.lista_telefones.COUNT;
     END;
 
 END;
@@ -116,22 +116,22 @@ END;
 	
 -- TIPO PUBLICACAO
 CREATE OR REPLACE TYPE tp_publicacao AS OBJECT(
-  	email REF tp_usuario,
-	cod_pub NUMBER,
-  	conteudo VARCHAR2(700),
-  	data_pub DATE
+    email REF tp_usuario,
+    cod_pub NUMBER,
+    conteudo VARCHAR2(700),
+    data_pub DATE
 );
 /
 -- TIPO USUARIO-PUBLICACAO
 CREATE OR REPLACE TYPE tp_usuario_pub AS OBJECT(
-	email REF tp_usuario,
-  	cod_pub REF tp_publicacao
+    email REF tp_usuario,
+    cod_pub REF tp_publicacao
 );
 /
 	
 -- TIPO AUTORES (DE UMA OBRA)
 CREATE OR REPLACE TYPE tp_autores AS OBJECT(
-	autor VARCHAR2(50)
+    autor VARCHAR2(50)
 );
 /
 	
@@ -151,12 +151,12 @@ CREATE OR REPLACE TYPE va_tp_generos AS VARRAY(3) OF tp_generos;
 	
 -- TIPO OBRA
 CREATE OR REPLACE TYPE tp_obra AS OBJECT(
-  	cod_obra NUMBER,
-  	titulo VARCHAR2(50),
-  	email_cad REF tp_usuario_pub,
-  	pub_cad REF tp_usuario_pub,
-  	lista_autores tp_nt_autores,
-  	lista_generos va_tp_generos,
+    cod_obra NUMBER,
+    titulo VARCHAR2(50),
+    email_cad REF tp_usuario_pub,
+    pub_cad REF tp_usuario_pub,
+    lista_autores tp_nt_autores,
+    lista_generos va_tp_generos,
 
     MEMBER FUNCTION qtdd_autores RETURN NUMBER,
     ORDER MEMBER FUNCTION compare_titulo (x tp_obra) RETURN NUMBER
