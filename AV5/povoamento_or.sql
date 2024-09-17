@@ -615,38 +615,42 @@ INSERT INTO tb_comentar VALUES(
 
 -- INSERINDO NA TABELA SEGUIR (S é o seguidor e F é o seguido)
 INSERT INTO tb_seguir VALUES(
-    (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'mlmn3@cin.ufpe.br'), 
-    (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'jdsilva@cin.ufpe.br')  
+    tp_seguir(
+        (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'mlmn3@cin.ufpe.br'), 
+        (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'jdsilva@cin.ufpe.br')
+    )
 );
 /
 
 INSERT INTO tb_seguir VALUES(
-    (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'anamaria@cin.ufpe.br'),
-    (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'lcosta@cin.ufpe.br')
+    tp_seguir(
+        (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'anamaria@cin.ufpe.br'),
+        (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'lcosta@cin.ufpe.br')
+    )
 );
 /
 
 INSERT INTO tb_seguir VALUES(
-    (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'lcosta@cin.ufpe.br'),
-    (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'anamaria@cin.ufpe.br')
+    tp_seguir(
+        (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'lcosta@cin.ufpe.br'),
+        (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'anamaria@cin.ufpe.br')
+    )
 );
 /
     
 INSERT INTO tb_seguir VALUES(
-    (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'rick.riordan@gmail.com'),
-    (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'jk.rowling@gmail.com')
+    tp_seguir(
+        (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'rick.riordan@gmail.com'),
+        (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'jk.rowling@gmail.com')
+    )
 );
 /
 
 INSERT INTO tb_seguir VALUES(
-    (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'mlmn3@cin.ufpe.br'),
-    (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'anamaria@cin.ufpe.br')
-);
-/
-
-INSERT INTO tb_seguir VALUES(
-    (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'anamaria@cin.ufpe.br'),
-    (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'ram3@cin.ufpe.br')
+    tp_seguir(
+        (SELECT REF(S) FROM tb_usuario S WHERE S.email = 'mlmn3@cin.ufpe.br'),
+        (SELECT REF(F) FROM tb_usuario F WHERE F.email = 'anamaria@cin.ufpe.br')
+    )
 );
 /
 
