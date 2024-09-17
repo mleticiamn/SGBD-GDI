@@ -25,7 +25,10 @@ CREATE OR REPLACE TYPE tp_usuario AS OBJECT(
     CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones, nome_completo tp_nome_completo) RETURN SELF AS RESULT,
 
     MEMBER PROCEDURE print_info (SELF tp_usuario),
-    FINAL MAP MEMBER FUNCTION qtdd_telefones RETURN NUMBER
+    FINAL MAP MEMBER FUNCTION qtdd_telefones RETURN NUMBER,
+
+    -- NOT INSTANTIABLE MEMBER
+    MEMBER PROCEDURE print_contato_autor ABSTRACT
 
 ) NOT FINAL;
 /
@@ -79,7 +82,8 @@ CREATE OR REPLACE TYPE tp_autor UNDER tp_usuario(
     biografia VARCHAR2(250),
     lista_premios tp_nt_premios,
 
-    OVERRIDING MEMBER PROCEDURE print_info (SELF tp_autor)
+    OVERRIDING MEMBER PROCEDURE print_info (SELF tp_autor),
+    OVERRIDING MEMBER PROCEDURE print_contato_autor (SELF tp_autor)
 );
 /
 
@@ -109,7 +113,12 @@ CREATE OR REPLACE TYPE BODY tp_autor AS
         ELSE
             DBMS_OUTPUT.PUT_LINE('Sem prêmios cadastrados.');
         END IF;
+    END;
 
+    OVERRIDING MEMBER PROCEDURE print_contato_autor (SELF tp_autor) IS
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE('Nome completo do autor: ' || SELF.nome_completo.nome || ' ' || SELF.nome_completo.sobrenome);
+        DBMS_OUTPUT.PUT_LINE('Para entrar em contato, mande email para: ' || SELF.email);
     END;
 END;
 /
