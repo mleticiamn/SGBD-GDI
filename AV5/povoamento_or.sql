@@ -659,7 +659,7 @@ INSERT INTO tb_curtir VALUES(
     tp_curtir(
         (SELECT REF(C) FROM tb_usuario C WHERE C.email = 'mlmn3@cin.ufpe.br'),
         (SELECT REF(P) FROM tb_usuario P WHERE P.email = 'jdsilva@cin.ufpe.br'),
-        (SELECT REF(A) FROM tB_usuario A WHERE A.cod_pub = 5)
+        (SELECT REF(A) FROM tb_publicacao A WHERE A.cod_pub = 5)
     )
 );
 /
@@ -668,7 +668,7 @@ INSERT INTO tb_curtir VALUES(
     tp_curtir(
         (SELECT REF(C) FROM tb_usuario C WHERE C.email = 'mlmn3@cin.ufpe.br'),
         (SELECT REF(P) FROM tb_usuario P WHERE P.email = 'rick.riordan@gmail.com'),
-        (SELECT REF(A) FROM tB_usuario A WHERE A.cod_pub = 2)
+        (SELECT REF(A) FROM tb_publicacao A WHERE A.cod_pub = 2)
     )
 );
 /
@@ -677,7 +677,7 @@ INSERT INTO tb_curtir VALUES(
     tp_curtir(
         (SELECT REF(C) FROM tb_usuario C WHERE C.email = 'mlmn3@cin.ufpe.br'),
         (SELECT REF(P) FROM tb_usuario P WHERE P.email = 'rick.riordan@gmail.com'),
-        (SELECT REF(A) FROM tB_usuario A WHERE A.cod_pub = 4)
+        (SELECT REF(A) FROM tb_publicacao A WHERE A.cod_pub = 4)
     )
 );
 /
@@ -686,7 +686,7 @@ INSERT INTO tb_curtir VALUES(
     tp_curtir(
         (SELECT REF(C) FROM tb_usuario C WHERE C.email = 'anamaria@cin.ufpe.br'),
         (SELECT REF(P) FROM tb_usuario P WHERE P.email = 'lcosta@cin.ufpe.br'),
-        (SELECT REF(A) FROM tB_usuario A WHERE A.cod_pub = 9)
+        (SELECT REF(A) FROM tb_publicacao A WHERE A.cod_pub = 9)
     )
 );
 /
@@ -695,7 +695,7 @@ INSERT INTO tb_curtir VALUES(
     tp_curtir(
         (SELECT REF(C) FROM tb_usuario C WHERE C.email = 'anamaria@cin.ufpe.br'),
         (SELECT REF(P) FROM tb_usuario P WHERE P.email = 'ram3@cin.ufpe.br'),
-        (SELECT REF(A) FROM tB_usuario A WHERE A.cod_pub = 9)
+        (SELECT REF(A) FROM tb_publicacao A WHERE A.cod_pub = 9)
     )
 );
 /
