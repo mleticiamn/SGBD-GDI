@@ -550,14 +550,14 @@ INSERT INTO tb_referenciar VALUES(
 
 
 -- CRIANDO SEQUÊNCIA PARA COD_COM
-CREATE SEQUENCE seq_cod_com INCREMENT BY 1 START 1;
+CREATE SEQUENCE seq_cod_com INCREMENT BY 1 START WITH 1;
 /
 -- INSERINDO NA TABELA COMENTARIO
 -- D É PARA O DONO DA PUBLICAÇÃO, P É PARA A PUBLICAÇÃO
 INSERT INTO tb_comentario VALUES(
     tp_comentario(
         (SELECT REF(D) FROM tb_publicacao D WHERE D.email = 'mlmn3@cin.ufpe.br'), 
-        (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_com = 1),
+        (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 1),
         seq_cod_com.NEXTVAL,
         'Também não gostei!'
     )
@@ -567,7 +567,7 @@ INSERT INTO tb_comentario VALUES(
 INSERT INTO tb_comentario VALUES(
     tp_comentario(
         (SELECT REF(D) FROM tb_publicacao D WHERE D.email = 'anamaria@cin.ufpe.br'), 
-        (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_com = 8),
+        (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 8),
         seq_cod_com.NEXTVAL,
         'Sim, já li! Achei intenso e cheio de emoções, com personagens complexos e uma atmosfera sombria.'
     )
@@ -577,7 +577,7 @@ INSERT INTO tb_comentario VALUES(
 INSERT INTO tb_comentario VALUES(
     tp_comentario(
         (SELECT REF(D) FROM tb_publicacao D WHERE D.email = 'lcosta@cin.ufpe.br'), 
-        (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_com = 9),
+        (SELECT REF(P) FROM tb_publicacao P WHERE P.cod_pub = 9),
         seq_cod_com.NEXTVAL,
         'Estou doido para ler esse, mas ainda não tive tempo'
     )
