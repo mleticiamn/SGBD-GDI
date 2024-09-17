@@ -122,6 +122,7 @@ CREATE OR REPLACE TYPE tp_publicacao AS OBJECT(
     data_pub DATE
 );
 /
+	
 -- TIPO USUARIO-PUBLICACAO
 CREATE OR REPLACE TYPE tp_usuario_pub AS OBJECT(
     email REF tp_usuario,
@@ -188,6 +189,7 @@ CREATE OR REPLACE TYPE tp_sinopses AS OBJECT(
     sinopse VARCHAR2(400)
 );
 /
+	
 -- TIPO REFERENCIAR
 CREATE OR REPLACE TYPE tp_referenciar AS OBJECT(
     cod_obra REF tp_obra,
@@ -228,6 +230,43 @@ CREATE OR REPLACE TYPE tp_curtir AS OBJECT(
 );
 /
 
--- ALTER TYPE tp_curtir
--- ADD ATRIBUTE (cod_pub REF tp_publicacao) CASCADE;
--- /
+-- ALTER TYPE
+ALTER TYPE tp_autor
+  ADD MEMBER FUNCTION qtdd_premios RETURN NUMBER;
+/
+	
+CREATE OR REPLACE TYPE BODY tp_autor AS
+    OVERRIDING MEMBER PROCEDURE print_info (SELF tp_autor) IS
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE('Email: ' || SELF.email);
+        DBMS_OUTPUT.PUT_LINE('Data de nascimento: ' || SELF.data_nasc);
+
+        IF SELF.lista_telefones IS NOT NULL THEN
+            FOR i IN 1..SELF.lista_telefones.COUNT LOOP
+                DBMS_OUTPUT.PUT_LINE('Telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
+            END LOOP;
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('Sem telefones.');
+        END IF;
+
+        DBMS_OUTPUT.PUT_LINE('Nome completo: ' || SELF.nome_completo.nome || ' ' || SELF.nome_completo.sobrenome);
+
+        DBMS_OUTPUT.PUT_LINE('Biografia: ' || SELF.biografia);
+
+        IF SELF.lista_premios IS NOT NULL AND SELF.lista_premios.COUNT > 0 THEN
+            DBMS_OUTPUT.PUT_LINE('Prêmios:');
+            FOR i IN 1..SELF.lista_premios.COUNT LOOP
+                DBMS_OUTPUT.PUT_LINE('  Prêmio ' || i || ': ' || SELF.lista_premios(i).premio);
+            END LOOP;
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('Sem prêmios cadastrados.');
+        END IF;
+
+    END;
+
+    MEMBER FUNCTION qtdd_premios RETURN NUMBER IS
+    BEGIN
+        RETURN SELF.lista_premios.COUNT;
+    END;
+END;
+/
