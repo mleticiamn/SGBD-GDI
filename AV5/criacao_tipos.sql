@@ -223,10 +223,11 @@ CREATE OR REPLACE TYPE tp_seguir AS OBJECT(
 -- TIPO CURTIR
 CREATE OR REPLACE TYPE tp_curtir AS OBJECT(
     email_curte REF tp_usuario,
-    email_publicou REF tp_usuario
+    email_publicou REF tp_usuario,
+    cod_pub REF tp_publicacao
 );
 /
 
-ALTER TYPE tp_curtir
-ADD ATRIBUTE (cod_pub REF tp_publicacao);
-/
+-- ALTER TYPE tp_curtir
+-- ADD ATRIBUTE (cod_pub REF tp_publicacao) CASCADE;
+-- /
