@@ -699,3 +699,11 @@ INSERT INTO tb_curtir VALUES(
     )
 );
 /
+
+-- VALUE
+UPDATE TABLE(
+    SELECT u FROM tb_usuario u WHERE u.nome = 'Rebeca Menezes'
+) e
+SET VALUE(e.va_tp_telefones) = tp_telefones('81922122431')
+WHERE e.nome = 'Rebeca Menezes';
+/
