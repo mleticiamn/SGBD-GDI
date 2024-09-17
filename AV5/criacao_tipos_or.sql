@@ -25,8 +25,7 @@ CREATE OR REPLACE TYPE tp_usuario AS OBJECT(
     CONSTRUCTOR FUNCTION tp_usuario(email VARCHAR2, data_nasc DATE, lista_telefones va_tp_telefones, nome_completo tp_nome_completo) RETURN SELF AS RESULT,
 
     MEMBER PROCEDURE print_info (SELF tp_usuario),
-    FINAL MAP MEMBER FUNCTION qtdd_telefones RETURN NUMBER,
-
+    FINAL MAP MEMBER FUNCTION qtdd_telefones RETURN NUMBER
 ) NOT FINAL;
 /
 
@@ -79,7 +78,7 @@ CREATE OR REPLACE TYPE tp_autor UNDER tp_usuario(
     biografia VARCHAR2(250),
     lista_premios tp_nt_premios,
 
-    OVERRIDING MEMBER PROCEDURE print_info (SELF tp_autor),
+    OVERRIDING MEMBER PROCEDURE print_info (SELF tp_autor)
 );
 /
 
