@@ -10,3 +10,9 @@ WHERE CARDINALITY(A.lista_premios) = (
     SELECT MAX(CARDINALITY(B.lista_premios))
     FROM tb_autor B
 );
+
+-- Seleciona as publicações feitas em março de 2024 e exibe todos os atributos associados a essas publicações
+SELECT DEREF(P.email).email AS email, P.cod_pub, P.conteudo, P.data_pub
+FROM tb_publicacao P
+WHERE P.data_pub >= TO_DATE('2024-03-01', 'YYYY-MM-DD')
+	AND P.data_pub < TO_DATE('2024-04-01', 'YYYY-MM-DD');
