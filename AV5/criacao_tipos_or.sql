@@ -36,7 +36,7 @@ CREATE OR REPLACE TYPE BODY tp_usuario AS
         SELF.data_nasc := data_nasc;
         SELF.lista_telefones := lista_telefones;
         SELF.nome_completo := nome_completo;
-        RETURN SELF;
+        RETURN;  -- No expression here
     END;
 
     MEMBER PROCEDURE print_info (SELF tp_usuario) IS
@@ -44,7 +44,7 @@ CREATE OR REPLACE TYPE BODY tp_usuario AS
         DBMS_OUTPUT.PUT_LINE('Email: ' || SELF.email);
         DBMS_OUTPUT.PUT_LINE('Data de nascimento: ' || SELF.data_nasc);
 
-	IF SELF.lista_telefones IS NOT NULL THEN
+        IF SELF.lista_telefones IS NOT NULL THEN
             FOR i IN 1..SELF.lista_telefones.COUNT LOOP
                 DBMS_OUTPUT.PUT_LINE('Telefone ' || i || ': ' || SELF.lista_telefones(i).numero);
             END LOOP;
@@ -52,8 +52,8 @@ CREATE OR REPLACE TYPE BODY tp_usuario AS
             DBMS_OUTPUT.PUT_LINE('Sem telefones.');
         END IF;
 
-	DBMS_OUTPUT.PUT_LINE('Nome completo: ' || SELF.nome_completo.nome || ' ' || SELF.nome_completo.sobrenome);
-    END
+        DBMS_OUTPUT.PUT_LINE('Nome completo: ' || SELF.nome_completo.nome || ' ' || SELF.nome_completo.sobrenome);
+    END;
 
     FINAL MAP MEMBER FUNCTION qtdd_telefones RETURN NUMBER IS
     BEGIN
@@ -140,7 +140,7 @@ CREATE OR REPLACE TYPE tp_nt_autores AS TABLE OF tp_autores;
 	
 -- TIPO GENEROS
 CREATE OR REPLACE TYPE tp_generos AS OBJECT(
-    genero VARCHAR2(15)
+    genero VARCHAR2(30)
 );
 /
 	
