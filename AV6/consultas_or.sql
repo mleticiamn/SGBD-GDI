@@ -30,3 +30,28 @@ SELECT O.titulo, G.genero
 FROM tb_obra O,
 	TABLE(O.lista_generos) G
 ORDER BY O.titulo;
+
+-- Seleciona o tamanho médio das sinopses por gênero
+SELECT AVG(LENGTH(sinopse)) AS tamano_medio, genero
+FROM(
+    SELECT O.titulo, G.genero, S.sinopse 
+    FROM tb_obra O, tb_sinopses S, 
+    TABLE (O.lista_generos) G
+    WHERE O.cod_obra = S.cod_obra.cod_obra )
+GROUP BY genero;
+
+-- Seleciona as informações das publicações do ano de 2024
+SELECT U.email, U.nome_completo.nome AS nome, U.nome_completo.sobrenome AS sobrenome, P.cod_pub, P.conteudo, P.data_pub
+FROM tb_usuario_pub UP
+INNER JOIN tb_usuario U ON U.email = DEREF(UP.email).email
+INNER JOIN tb_publicacao P ON P.cod_pub = DEREF(UP.cod_pub).cod_pub
+WHERE P.data_pub > TO_DATE('31-12-2023', 'DD-MM-YYYY')  -- publicações do ano 2024
+ORDER BY P.data_pub DESC;
+
+-- Seleciona quantos comentarios por publicacao
+SELECT P.cod_pub, P.conteudo, COUNT(C.cod_com) AS quantidade_comentarios
+FROM tb_publicacao P
+LEFT JOIN tb_comentario C ON C.cod_pub.cod_pub = P.cod_pub
+GROUP BY P.cod_pub, P.conteudo
+ORDER BY P.cod_pub, P.conteudo;
+
