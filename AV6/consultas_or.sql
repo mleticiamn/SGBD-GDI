@@ -80,3 +80,33 @@ SELECT D.email_curte.email, COUNT(REF(D)) AS numero_curtidas_dadas
 FROM tb_curtir D
 WHERE D.email_curte.email = 'mlmn3@cin.ufpe.br'
 GROUP BY D.email_curte.email;
+
+-- Retorna a obra que aparece primeiro alfabéticamente
+-- Utiliza a função compare_titulo
+DECLARE
+    obra1 tp_obra;
+    obra2 tp_obra;
+    comp_result NUMBER;
+
+BEGIN
+    SELECT VALUE(O)
+    INTO obra1
+    FROM tb_obra o
+    WHERE o.titulo = 'Moby Dick';
+
+    SELECT VALUE(O)
+    INTO obra2
+    FROM tb_obra O
+    WHERE O.titulo = 'Percy Jackson e o Ladrão de Raios';
+
+    comp_result := obra1.compare_titulo(obra2);
+
+    IF comp_result = -1 THEN
+        DBMS_OUTPUT.PUT_LINE('Obra1 vem antes de Obra2.');
+    ELSIF comp_result = 1 THEN
+        DBMS_OUTPUT.PUT_LINE('Obra1 vem depois de Obra2.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Obra1 e Obra2 têm o mesmo título.');
+    END IF;
+END;
+/
