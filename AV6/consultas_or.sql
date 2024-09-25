@@ -55,3 +55,10 @@ LEFT JOIN tb_comentario C ON C.cod_pub.cod_pub = P.cod_pub
 GROUP BY P.cod_pub, P.conteudo
 ORDER BY P.cod_pub, P.conteudo;
 
+-- Seleciona os usuários que possuem a maior quantidade de telefones
+SELECT U.nome_completo.nome AS nome, U.nome_completo.sobrenome AS sobrenome, U.email, U.qtdd_telefones() AS quantidade_telefones
+FROM tb_usuario U
+WHERE U.qtdd_telefones() = (
+    SELECT MAX(U2.qtdd_telefones())
+    FROM tb_usuario U2
+);
