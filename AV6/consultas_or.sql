@@ -62,3 +62,21 @@ WHERE U.qtdd_telefones() = (
     SELECT MAX(U2.qtdd_telefones())
     FROM tb_usuario U2
 );
+
+--Seleciona os comentários de determinado usuário
+SELECT CR.email.email AS EMAIL, CR.cod_pub.conteudo AS PUBLICACAO, CR.cod_com.conteudo AS COMENTARIO
+FROM tb_comentar CR
+WHERE CR.email.email = 'jdsilva@cin.ufpe.br'
+GROUP BY CR.email.email, CR.cod_pub.conteudo, CR.cod_com.conteudo;
+
+--Seleciona o número de curtidas de uma determinada publicação
+SELECT D.cod_pub.conteudo AS PUBLICACAO, D.email_publicou.email AS EMAIL, COUNT(REF(D)) AS numero_curtidas
+FROM tb_curtir D
+WHERE D.cod_pub.cod_pub = 9
+GROUP BY D.cod_pub.conteudo, D.email_publicou.email;
+
+--Seleciona o número de curtidas dadas por um determinado usuário
+SELECT D.email_curte.email, COUNT(REF(D)) AS numero_curtidas_dadas
+FROM tb_curtir D
+WHERE D.email_curte.email = 'mlmn3@cin.ufpe.br'
+GROUP BY D.email_curte.email;
