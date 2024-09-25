@@ -110,3 +110,19 @@ BEGIN
     END IF;
 END;
 /
+
+-- Testando procedure print_info em usuario comum
+DECLARE
+    usuario tp_usuario;
+BEGIN
+    SELECT VALUE(U) INTO usuario FROM tb_usuario U WHERE U.email = 'mlmn3@cin.ufpe.br';
+    usuario.print_info();
+END;
+
+-- Testando procedure print_info em autor (overriding)
+DECLARE
+    autor tp_autor;
+BEGIN
+    SELECT VALUE(A) INTO autor FROM tb_autor A WHERE A.email = 'george.martin@gmail.com';
+    autor.print_info();
+END;
