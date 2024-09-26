@@ -44,7 +44,7 @@ FROM tb_obra O,
 ORDER BY O.titulo;
 
 -- Seleciona o tamanho médio das sinopses por gênero
-SELECT AVG(LENGTH(sinopse)) AS tamano_medio, genero
+SELECT AVG(LENGTH(sinopse)) AS tamanho_medio, genero
 FROM(
     SELECT O.titulo, G.genero, S.sinopse 
     FROM tb_obra O, tb_sinopses S, 
@@ -92,13 +92,13 @@ HAVING COUNT(S.seguidor) > 0
 ORDER BY num_seguidores DESC;
 
 --Seleciona o número de curtidas de uma determinada publicação
-SELECT D.cod_pub.conteudo AS PUBLICACAO, D.email_publicou.email AS EMAIL, COUNT(REF(D)) AS numero_curtidas
+SELECT D.cod_pub.conteudo AS PUBLICACAO, COUNT(REF(D)) AS numero_curtidas
 FROM tb_curtir D
 WHERE D.cod_pub.cod_pub = 9
-GROUP BY D.cod_pub.conteudo, D.email_publicou.email;
+GROUP BY D.cod_pub.conteudo;
 
 --Seleciona o número de curtidas dadas por um determinado usuário
-SELECT D.email_curte.email, COUNT(REF(D)) AS numero_curtidas_dadas
+SELECT D.email_curte.email AS usuario, COUNT(REF(D)) AS numero_curtidas_dadas
 FROM tb_curtir D
 WHERE D.email_curte.email = 'mlmn3@cin.ufpe.br'
 GROUP BY D.email_curte.email;
