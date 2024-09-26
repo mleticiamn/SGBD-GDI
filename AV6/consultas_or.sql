@@ -69,6 +69,14 @@ FROM tb_comentar CR
 WHERE CR.email.email = 'jdsilva@cin.ufpe.br'
 GROUP BY CR.email.email, CR.cod_pub.conteudo, CR.cod_com.conteudo;
 
+-- Retorna uma lista de usuários que possuem seguidores, exibindo o número de seguidores para cada um e organizando o resultado em ordem decrescente de seguidores
+SELECT seguido.email AS seguido_email, COUNT(S.seguidor) AS num_seguidores
+FROM tb_seguir S
+JOIN tb_usuario seguido ON S.seguido = REF(seguido)
+GROUP BY seguido.email
+HAVING COUNT(S.seguidor) > 0
+ORDER BY num_seguidores DESC;
+
 --Seleciona o número de curtidas de uma determinada publicação
 SELECT D.cod_pub.conteudo AS PUBLICACAO, D.email_publicou.email AS EMAIL, COUNT(REF(D)) AS numero_curtidas
 FROM tb_curtir D
