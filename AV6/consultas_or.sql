@@ -131,6 +131,12 @@ FROM tb_obra O
 WHERE O.qtdd_autores() > 1
 ORDER BY O.qtdd_autores() DESC;
 
+-- Seleciona os autores ordenados pela quantidade de prêmios
+-- Utiliza a função qtdd_premios
+SELECT A.nome_completo.nome AS nome, A.nome_completo.sobrenome AS sobrenome, A.qtdd_premios() AS quantidade_premios
+FROM tb_autor A
+ORDER BY A.qtdd_premios() DESC;
+
 -- Testando procedure print_info em usuario comum
 DECLARE
     usuario tp_usuario;
