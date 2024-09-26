@@ -1,5 +1,5 @@
 -- Seleciona os emails dos usuários que possuem mais de 20 caracteres
-SELECT U.email 
+SELECT U.email, COUNT(*) OVER() AS quantidade_emails
 FROM tb_usuario U
 WHERE LENGTH(U.email) > 20;
 
@@ -19,11 +19,23 @@ WHERE P.data_pub >= TO_DATE('2024-03-01', 'YYYY-MM-DD')
 	AND P.data_pub < TO_DATE('2024-04-01', 'YYYY-MM-DD');
 
 -- Seleciona os usuários que realizaram publicações e exibe seus nomes em ordem alfabética, eliminando resultados duplicados
-SELECT DISTINCT U.nome_completo.nome AS nome
-FROM tb_usuario_pub T, tb_usuario U
-WHERE u.email = DEREF(T.email).email
+SELECT U.nome_completo.nome AS nome, COUNT(DISTINCT UP.cod_pub) AS quantidade_publicacoes
+FROM tb_usuario_pub UP
+JOIN tb_usuario U ON U.email = DEREF(UP.email).email
+GROUP BY U.nome_completo.nome
 ORDER BY U.nome_completo.nome;
 
+-- Seleciona o(s) usuário(s) que realizou(aram) mais publicações
+SELECT T.nome, T.quantidade_publicacoes
+FROM (SELECT U.nome_completo.nome AS nome, COUNT(DISTINCT UP.cod_pub) AS quantidade_publicacoes
+    FROM tb_usuario_pub UP
+    JOIN tb_usuario U ON U.email = DEREF(UP.email).email
+    GROUP BY U.nome_completo.nome
+    ORDER BY U.nome_completo.nome) T
+WHERE T.quantidade_publicacoes = ANY(SELECT MAX(COUNT(DISTINCT UP2.cod_pub))
+    				     FROM tb_usuario_pub UP2
+    				     GROUP BY UP2.email
+);
 -- Seleciona o título de cada obra e os gêneros associados a ela. No fim, exibe os resultados em ordem alfabética de acordo com o título
 -- É uma consulta à varray
 SELECT O.titulo, G.genero
@@ -41,11 +53,13 @@ FROM(
 GROUP BY genero;
 
 -- Seleciona as informações das publicações do ano de 2024
-SELECT U.email, U.nome_completo.nome AS nome, U.nome_completo.sobrenome AS sobrenome, P.cod_pub, P.conteudo, P.data_pub
+SELECT U.email, U.nome_completo.nome AS nome, U.nome_completo.sobrenome AS sobrenome, P.cod_pub, P.conteudo, P.data_pub, COUNT(C.cod_com) AS quantidade_comentarios
 FROM tb_usuario_pub UP
 INNER JOIN tb_usuario U ON U.email = DEREF(UP.email).email
 INNER JOIN tb_publicacao P ON P.cod_pub = DEREF(UP.cod_pub).cod_pub
-WHERE P.data_pub > TO_DATE('31-12-2023', 'DD-MM-YYYY')  -- publicações do ano 2024
+LEFT JOIN tb_comentario C ON C.cod_pub.cod_pub = P.cod_pub
+WHERE P.data_pub > TO_DATE('31-12-2023', 'DD-MM-YYYY')
+GROUP BY U.email, U.nome_completo.nome, U.nome_completo.sobrenome, P.cod_pub, P.conteudo, P.data_pub
 ORDER BY P.data_pub DESC;
 
 -- Seleciona quantos comentarios por publicacao
