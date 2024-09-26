@@ -144,7 +144,7 @@ BEGIN
     SELECT VALUE(U) INTO usuario FROM tb_usuario U WHERE U.email = 'mlmn3@cin.ufpe.br';
     usuario.print_info();
 END;
-
+/
 -- Testando procedure print_info em autor (overriding)
 DECLARE
     autor tp_autor;
