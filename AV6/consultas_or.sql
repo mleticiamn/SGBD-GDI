@@ -119,6 +119,18 @@ BEGIN
 END;
 /
 
+-- Retorna o título da obra e a quantidade de autores
+-- Utiliza a função qtdd_autores
+SELECT o.titulo, o.qtdd_autores() AS quantidade_de_autores
+FROM tb_obra o;
+
+-- Retorna o título das obras com mais de um autor
+-- Utiliza a função qtdd_autores
+SELECT O.titulo AS titulo_obra, O.qtdd_autores() AS quantidade_de_autores
+FROM tb_obra O
+WHERE O.qtdd_autores() > 1
+ORDER BY O.qtdd_autores() DESC;
+
 -- Testando procedure print_info em usuario comum
 DECLARE
     usuario tp_usuario;
