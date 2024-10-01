@@ -1,1 +1,0 @@
--- Arquivo criado apenas para testar algo
