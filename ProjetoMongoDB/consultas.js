@@ -24,4 +24,11 @@ db.livros.find({qtdd_disponivel: {$gt: 0}});
 db.livros.find({qtdd_disponivel: 0});
 //FIND: retorna livros publicados no ano mais recente
 db.livros.find({data_pub: {$gt: new Date("2023-12-31T00:00:00.000Z")}});
-  
+
+//AGGREGATE, MATCH, GROUP e AVG: retorna a média das críticas de cada livro
+db.livros.aggregate([
+  { $unwind: '$critica' },
+  { $match: { 'critica.nota': { $gt: 90 } } },
+  { $group: { _id: '$titulo', media: { $avg: '$critica.nota' } } }
+]);
+
