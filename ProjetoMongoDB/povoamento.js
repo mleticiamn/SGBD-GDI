@@ -9,19 +9,24 @@ db.createCollection("reservas");
 
 db.livros.insertMany([
 	{
-	  _id: 1,
-	  titulo: 'Percy Jackson e o Ladrão de Raios',
-	  data_pub: new Date('2005-06-28'),
-	  sinopse: 'Um artefato precioso foi roubado do Monte Olimpo e Percy é o principal suspeito. Para restaurar a paz, ele e seus amigos – jovens heróis modernos – terão de fazer mais do que capturar o verdadeiro ladrão: precisam elucidar uma traição mais ameaçadora que fúria dos deuses.',
-	  generos: ['ação', 'aventura'],
-	  status: 'emprestado',
-	  qtdd_disponivel: 3,
-	  num_paginas: 256,
-	  critica: [
-	    { veiculo: 'The New York Times', nota: 90 },
-	    { veiculo: 'Kirkus Reviews', nota: 88 },
-	    { veiculo: 'Goodreads', nota: 92 }
-	  ]
+	 _id: 1,
+    	 titulo: 'Percy Jackson e o Ladrão de Raios',
+    	 data_pub: new Date('2005-06-28'),
+    	 sinopse: 'Um artefato precioso foi roubado do Monte Olimpo e Percy é o principal suspeito. Para restaurar a paz, ele e seus amigos – jovens heróis modernos – terão de fazer mais do que capturar o verdadeiro ladrão: precisam elucidar uma traição mais ameaçadora que fúria dos deuses.',
+    	 generos: ['ação', 'aventura'],
+    	 qtdd_disponivel: 10,
+    	 critica: [
+        	{ veiculo: 'The New York Times', nota: 90 },
+        	{ veiculo: 'Kirkus Reviews', nota: 88 },
+        	{ veiculo: 'Goodreads', nota: 92 }
+    	],
+    	emprestimo: [
+        	{membro_id: 1,
+        	data_inicio: new Date('2024-06-05'),
+        	data_fim: new Date('2024-06-12')}
+    	],
+	reserva: [],
+   	autor_id: 1 
 	},
 	{
 	  _id: 2,
@@ -30,13 +35,27 @@ db.livros.insertMany([
 	  sinopse: 'Para salvar o mundo, Percy e seus amigos precisam encontrar o poderoso e mágico Velocino de Ouro.',
 	  generos: ['ação', 'aventura'],
 	  status: 'reservado',
-	  qtdd_disponivel: 3,
+	  qtdd_disponivel: 0,
 	  num_paginas: 304,
 	  critica: [
 	    { veiculo: 'The New York Times', nota: 85 },
 	    { veiculo: 'Kirkus Reviews', nota: 87 },
 	    { veiculo: 'Goodreads', nota: 91 }
-	  ]
+	  ],
+	  emprestimo: [
+        	{membro_id: 3,
+        	data_inicio: new Date('2024-02-05'),
+        	data_fim: new Date('2024-02-12')},
+		{membro_id: 1,
+        	data_inicio: new Date('2024-02-07'),
+        	data_fim: new Date('2024-02-14')},
+    	],
+	  reserva: [
+		{membro_id: 2,
+		data_pedido: new Date('2024-07-08')
+		}
+	],
+	  autor_id: 1
 	},
 	{
 	  _id: 3,
@@ -51,7 +70,14 @@ db.livros.insertMany([
 	    { veiculo: 'The New York Times', nota: 80 },
 	    { veiculo: 'Kirkus Reviews', nota: 85 },
 	    { veiculo: 'Goodreads', nota: 90 }
-	  ]
+	  ],
+	  emprestimo: [
+	  	{membro_id: 2,
+	 	 data_inicio: new Date('2024-06-21'),
+	  	 data_fim: new Date('2024-06-28')}
+    	  ],
+	  reserva: [],
+	  autor_id: 2
 	},
 	{
 	  _id: 4,
@@ -66,7 +92,14 @@ db.livros.insertMany([
 	    { veiculo: 'The New York Times', nota: 95 },
 	    { veiculo: 'Kirkus Reviews', nota: 97 },
 	    { veiculo: 'Goodreads', nota: 98 }
-	  ]
+	  ],
+	  emprestimo: [
+            {membro_id: 2,
+             data_inicio: new Date('2024-05-15'),
+             data_fim: new Date('2024-05-22')}
+    	  ],
+	  reserva: [],
+	  autor_id: 3
 	},
 	{
 	  _id: 5,
@@ -81,7 +114,14 @@ db.livros.insertMany([
 	    { veiculo: 'The New York Times', nota: 88 },
 	    { veiculo: 'Kirkus Reviews', nota: 90 },
 	    { veiculo: 'Goodreads', nota: 92 }
-	  ]
+	  ],
+	  emprestimo: [
+            {membro_id: 3,
+             data_inicio: new Date('2024-07-18'),
+             data_fim: new Date('2024-07-25')}
+    	  ],
+	    reserva: [],
+	    autor_id: 4
 	},
 	{
 	  _id: 6,
@@ -96,7 +136,14 @@ db.livros.insertMany([
 	    { veiculo: 'The New York Times', nota: 92 },
 	    { veiculo: 'Publishers Weekly', nota: 94 },
 	    { veiculo: 'Goodreads', nota: 95 }
-	  ]
+	  ],
+	  emprestimo: [
+            {membro_id: 1,
+             data_inicio: new Date('2024-04-15'),
+             data_fim: new Date('2024-04-22')}
+    	  ],
+	  reserva: [],
+	  autor_id: 5
 	}
 ]);
   
