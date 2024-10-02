@@ -216,7 +216,11 @@ db.livros.insertMany([
 		  { veiculo: 'The Guardian', nota: 88 },
 		  { veiculo: 'Goodreads', nota: 90 }
 		],
-		emprestimo: [],
+		emprestimo: [
+			{membro_id: 5,
+				data_inicio: new Date('2024-06-30'),
+				data_fim: new Date('2024-06-31')}
+		],
 		reserva: [],
 		autor_id: 8
 	  },
@@ -235,7 +239,11 @@ db.livros.insertMany([
 		  { veiculo: 'Goodreads', nota: 88 }
 		],
 		emprestimo: [],
-		reserva: [],
+		reserva: [
+			{membro_id: 2,
+			data_pedido: new Date('2024-07-29')
+			}
+		],
 		autor_id: 9
 	  },
 	  {
@@ -303,7 +311,11 @@ db.livros.insertMany([
 		  { veiculo: 'Goodreads', nota: 96 }
 		],
 		emprestimo: [],
-		reserva: [],
+		reserva: [
+			{membro_id: 7,
+			data_pedido: new Date('2024-07-08')
+			}
+		],
 		autor_id: 12
 	  }
 ]);
@@ -460,7 +472,8 @@ db.membros.insertMany([
             {livro_id: 4, data_inicio: new Date('2024-05-15'), data_fim: new Date('2024-05-22')}
         ],
         reservas: [
-            {livro_id: 2, data_pedido: new Date('2024-07-08')}
+            {livro_id: 2, data_pedido: new Date('2024-07-08')},
+			{livro_id: 11, data_pedido: new Date('2024-07-29')}
         ]
     },
     {
@@ -474,6 +487,74 @@ db.membros.insertMany([
             {livro_id: 2, data_inicio: new Date('2024-02-05'), data_fim: new Date('2024-02-12')}
         ],
         reservas: []
+    },
+    {
+        _id: 4,
+        idade: 28,
+        nome: 'Ricardo Lima',
+        data_filiacao: new Date('2022-11-10'),
+        email: 'ricardolima@gmail.com',
+        emprestimos: [
+            {livro_id: 1, data_inicio: new Date('2024-06-10'), data_fim: new Date('2024-06-17')},
+            {livro_id: 3, data_inicio: new Date('2024-07-05'), data_fim: new Date('2024-07-12')}
+        ],
+        reservas: [
+            {livro_id: 4, data_pedido: new Date('2024-06-01')}
+        ]
+    },
+    {
+        _id: 5,
+        idade: 42,
+        nome: 'Claudia Martins',
+        data_filiacao: new Date('2021-05-15'),
+        email: 'claudiamartins@gmail.com',
+        emprestimos: [
+            {livro_id: 2, data_inicio: new Date('2024-03-01'), data_fim: new Date('2024-03-08')},
+            {livro_id: 6, data_inicio: new Date('2024-04-22'), data_fim: new Date('2024-04-29')},
+			{livro_id: 10, data_inicio: new Date('2024-04-30'), data_fim: new Date('2024-04-31')}
+        ],
+        reservas: []
+    },
+    {
+        _id: 6,
+        idade: 22,
+        nome: 'Lucas Oliveira',
+        data_filiacao: new Date('2023-02-28'),
+        email: 'lucasoliveira@gmail.com',
+        emprestimos: [
+            {livro_id: 5, data_inicio: new Date('2024-08-01'), data_fim: new Date('2024-08-08')},
+            {livro_id: 4, data_inicio: new Date('2024-06-20'), data_fim: new Date('2024-06-27')}
+        ],
+        reservas: [
+            {livro_id: 3, data_pedido: new Date('2024-07-15')}
+        ]
+    },
+    {
+        _id: 7,
+        idade: 19,
+        nome: 'Fernanda Costa',
+        data_filiacao: new Date('2022-01-20'),
+        email: 'fernandacosta@gmail.com',
+        emprestimos: [
+            {livro_id: 6, data_inicio: new Date('2024-05-10'), data_fim: new Date('2024-05-17')}
+        ],
+        reservas: [
+            {livro_id: 1, data_pedido: new Date('2024-08-15')},
+			{livro_id: 15, data_pedido: new Date('2024-07-15')},
+        ]
+    },
+    {
+        _id: 8,
+        idade: 37,
+        nome: 'André Gomes',
+        data_filiacao: new Date('2020-09-05'),
+        email: 'andregomes@gmail.com',
+        emprestimos: [
+            {livro_id: 2, data_inicio: new Date('2024-02-15'), data_fim: new Date('2024-02-22')}
+        ],
+        reservas: [
+            {livro_id: 5, data_pedido: new Date('2024-07-10')}
+        ]
     }
 ]);
 
