@@ -54,3 +54,9 @@ db.livros.aggregate([
   { $group: { _id: '$titulo', media: { $avg: '$critica.nota' } } }
 ]);
 
+//AGGREGATE, GROUP, SUM: retorna a quantidade total de livros disponíveis  por status
+db.livros.aggregate([
+  { $group: { _id: "$status", totalDisponivel: { $sum: "$qtdd_disponivel" } } }
+]);
+
+
