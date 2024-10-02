@@ -11,7 +11,7 @@ db.livros.insertOne(
 	{
 	_id: 1,
 	titulo: 'Percy Jackson e o Ladrão de Raios',
-	data_pub: Date('28/06/2005'),
+	data_pub: new Date('2005-06-28'),
 	sinopse: 'Um artefato precioso foi roubado do Monte Olimpo e Percy é o principal suspeito. Para restaurar a paz, ele e seus amigos – jovens heróis modernos – terão de fazer mais do que capturar o verdadeiro ladrão: precisam elucidar uma traição mais ameaçadora que fúria dos deuses.',
 	generos: [
 		'ação',
@@ -27,7 +27,7 @@ db.autores.insertOne(
 	{
 	_id: 1,
 	nome: 'Richard Russell Riordan Jr',
-	data_nasc: Date('05/06/1964'),
+	data_nasc: new Date('1964-06-05'),
 	email: 'rickriordan@gmail.com',
 	livros_escritos: [
 			1	
@@ -42,7 +42,7 @@ db.membros.insertOne(
 	{
 	_id: 1,
 	nome: 'José da Silva',
-	data_filiacao: Date('05/06/2022'),
+	data_filiacao: new Date('2022-06-05'),
 	email: 'josesilva@gmail.com'
 	}
 );
@@ -65,7 +65,7 @@ db.emprestimos.insertOne(
 	{
 	livro_id: 1,
 	membro_id: 1,
-	data: Date('05/06/2024'),
+	data: new Date('2024-06-05'),
 	tempo: '7 dias'
 	}
 );
@@ -74,6 +74,6 @@ db.reservas.insertOne(
 	{
 	livro_id: 1,
 	membro_id: 1,
-	data: Date('09/06/2024'),
+	data: new Date('2024-06-09'),
 	}
 );
