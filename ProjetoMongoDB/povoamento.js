@@ -337,7 +337,8 @@ db.autores.insertMany([
 	  data_nasc: new Date('1892-01-03'),
 	  email: 'tolkien@gmail.com',
 	  livros_escritos: [
-		db.livros.findOne({titulo: 'O Senhor dos Anéis: A Sociedade do Anel'})
+		db.livros.findOne({titulo: 'O Senhor dos Anéis: A Sociedade do Anel'}),
+		db.livros.findOne({titulo: 'O Hobbit'})
 	  ],
 	  premios: ['melhor fantasia 1955']
 	},
@@ -360,6 +361,77 @@ db.autores.insertMany([
 		  db.livros.findOne({titulo: 'Orgulho e Preconceito'})
 		],
 		premios: ['Clássico da Literatura Inglesa']
+	  },
+	  {
+		_id: 6,
+		nome: 'Markus Zusak',
+		data_nasc: new Date('1975-06-23'),
+		email: 'markuszusak@gmail.com',
+		livros_escritos: [
+		  db.livros.findOne({titulo: 'A Menina que Roubava Livros'})
+		],
+		premios: ['Prêmio da Crítica da Austrália', 'Prêmio de Melhor Livro do Ano de 2006']
+	  },
+	  {
+		_id: 7,
+		nome: 'George Orwell',
+		data_nasc: new Date('1903-06-25'),
+		email: 'georgeorwell@gmail.com',
+		livros_escritos: [
+		  db.livros.findOne({titulo: '1984'}),
+		  db.livros.findOne({titulo: 'A Revolução dos Bichos'})
+		],
+		premios: ['Prêmio Hugo de Melhor Romance', 'Prêmio Prometheus']
+	  },
+	  {
+		_id: 8,
+		nome: 'Miguel de Cervantes',
+		data_nasc: new Date('1547-09-29'),
+		email: 'cervantes@gmail.com',
+		livros_escritos: [
+		  db.livros.findOne({titulo: 'Dom Quixote'})
+		],
+		premios: ['Reconhecimento como um dos maiores romancistas da literatura']
+	  },
+	  {
+		_id: 9,
+		nome: 'J.D. Salinger',
+		data_nasc: new Date('1919-01-01'),
+		email: 'jd.salinger@gmail.com',
+		livros_escritos: [
+		  db.livros.findOne({titulo: 'O Apanhador no Campo de Centeio'})
+		],
+		premios: ['Prêmio de Melhor Livro do Ano de 1951']
+	  },
+	  {
+		_id: 10,
+		nome: 'Gabriel García Márquez',
+		data_nasc: new Date('1927-03-06'),
+		email: 'gabrielgarcia@gmail.com',
+		livros_escritos: [
+		  db.livros.findOne({titulo: 'Cem Anos de Solidão'})
+		],
+		premios: ['Prêmio Nobel de Literatura', 'Prêmio de Literatura Latino-Americana']
+	  },
+	  {
+		_id: 11,
+		nome: 'A. Huxley',
+		data_nasc: new Date('1894-07-26'),
+		email: 'aldoushuxley@gmail.com',
+		livros_escritos: [
+		  db.livros.findOne({titulo: 'Admirável Mundo Novo'})
+		],
+		premios: ['Prêmio James Tait Black']
+	  },
+	  {
+		_id: 12,
+		nome: 'Antoine de Saint-Exupéry',
+		data_nasc: new Date('1900-06-29'),
+		email: 'saint-exupery@gmail.com',
+		livros_escritos: [
+		  db.livros.findOne({titulo: 'O Pequeno Príncipe'})
+		],
+		premios: ['Prêmio de Literatura Juvenil']
 	  }
 ]);
 
