@@ -19,7 +19,7 @@ db.autores.aggregate([
   {$project: {nome: 1, n_premios: {$size: "$premios"}}},
   {$sort: {n_premios: -1}},
   {$limit: 1}
-])
+]);
 
 //FIND: retorna livros do genero aventura 
 db.livros.find({generos: 'aventura'});
