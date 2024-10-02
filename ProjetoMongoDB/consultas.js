@@ -4,7 +4,7 @@ db.membros.find({}).pretty();
 // FIND e COUNT: retorna a quantidade de autores
 db.autores.find({}).count();
 
-// FIND e ELEMMATCH: Selecionando os livros que receberam uma nota maior ou igual a 90 do The New York Times
+// FIND e ELEMMATCH: seleciona os livros que receberam uma nota maior ou igual a 90 do The New York Times
 db.livros.find({
     critica: {
       $elemMatch: {
@@ -14,7 +14,7 @@ db.livros.find({
     }
 });
 
-// EXISTS e NE: retorna os eventos que tẽm autores e membros e são não vazios
+// FIND e EXISTS: retorna os eventos que tẽm autores e membros e são não vazios
 db.eventos.find({
   $and: [
     { autores: { $exists: true, $ne: [] } }, 
@@ -22,12 +22,17 @@ db.eventos.find({
   ]
 });
 
-
 // AGGREGATE, PROJECT, SORT e LIMIT: retorna o nome autor que possui o maior número de prêmios
 db.autores.aggregate([
   {$project: {nome: 1, n_premios: {$size: "$premios"}}},
   {$sort: {n_premios: -1}},
   {$limit: 1}
+]);
+
+// AGGREGATE, MATCH e GROUP: seleciona a média do número de páginas dos livros lançados a partir dos anos 2000
+db.livros.aggregate([
+  { $match: { data_pub: { $gte: new Date('2000-01-01') } } },
+  { $group: { _id: null,  media_paginas: { $avg: "$num_paginas" } } }
 ]);
 
 //FIND: retorna livros do genero aventura 
