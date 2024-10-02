@@ -144,7 +144,168 @@ db.livros.insertMany([
     	  ],
 	  reserva: [],
 	  autor_id: 5
-	}
+	},
+	{
+		_id: 7,
+		titulo: 'A Menina que Roubava Livros',
+		data_pub: new Date('2005-09-01'),
+		sinopse: 'Durante a Segunda Guerra Mundial, uma jovem alemã encontra conforto ao roubar livros e compartilhá-los com seus vizinhos.',
+		generos: ['drama', 'histórico'],
+		status: 'disponível',
+		qtdd_disponivel: 8,
+		num_paginas: 552,
+		critica: [
+		  { veiculo: 'The Guardian', nota: 85 },
+		  { veiculo: 'The New York Times', nota: 88 },
+		  { veiculo: 'Goodreads', nota: 91 }
+		],
+		emprestimo: [],
+		reserva: [],
+		autor_id: 6
+	  },
+	  {
+		_id: 8,
+		titulo: 'O Hobbit',
+		data_pub: new Date('1937-09-21'),
+		sinopse: 'Bilbo Bolseiro é levado em uma aventura inesperada para recuperar o tesouro guardado pelo dragão Smaug.',
+		generos: ['fantasia', 'aventura'],
+		status: 'disponível',
+		qtdd_disponivel: 6,
+		num_paginas: 310,
+		critica: [
+		  { veiculo: 'The New York Times', nota: 92 },
+		  { veiculo: 'Kirkus Reviews', nota: 95 },
+		  { veiculo: 'Goodreads', nota: 96 }
+		],
+		emprestimo: [],
+		reserva: [],
+		autor_id: 3
+	  },
+	  {
+		_id: 9,
+		titulo: '1984',
+		data_pub: new Date('1949-06-08'),
+		sinopse: 'Em uma sociedade totalitária, Winston Smith luta contra o governo onipresente e a vigilância constante do Grande Irmão.',
+		generos: ['ficção científica', 'distopia'],
+		status: 'disponível',
+		qtdd_disponivel: 5,
+		num_paginas: 328,
+		critica: [
+		  { veiculo: 'The Guardian', nota: 94 },
+		  { veiculo: 'The New York Times', nota: 96 },
+		  { veiculo: 'Publishers Weekly', nota: 93 }
+		],
+		emprestimo: [
+			  {membro_id: 2,
+			   data_inicio: new Date('2024-03-15'),
+			   data_fim: new Date('2024-03-22')}
+			],
+		reserva: [],
+		autor_id: 7
+	  },
+	  {
+		_id: 10,
+		titulo: 'Dom Quixote',
+		data_pub: new Date('1605-01-16'),
+		sinopse: 'A história das aventuras de Dom Quixote de La Mancha, um fidalgo que acredita ser um cavaleiro medieval.',
+		generos: ['clássico', 'aventura'],
+		status: 'disponível',
+		qtdd_disponivel: 4,
+		num_paginas: 1072,
+		critica: [
+		  { veiculo: 'The Guardian', nota: 88 },
+		  { veiculo: 'Goodreads', nota: 90 }
+		],
+		emprestimo: [],
+		reserva: [],
+		autor_id: 8
+	  },
+	  {
+		_id: 11,
+		titulo: 'O Apanhador no Campo de Centeio',
+		data_pub: new Date('1951-07-16'),
+		sinopse: 'Holden Caulfield, um adolescente perturbado, narra sua fuga de um colégio interno e suas reflexões sobre a vida.',
+		generos: ['drama', 'ficção'],
+		status: 'disponível',
+		qtdd_disponivel: 9,
+		num_paginas: 234,
+		critica: [
+		  { veiculo: 'The New York Times', nota: 89 },
+		  { veiculo: 'Kirkus Reviews', nota: 87 },
+		  { veiculo: 'Goodreads', nota: 88 }
+		],
+		emprestimo: [],
+		reserva: [],
+		autor_id: 9
+	  },
+	  {
+		_id: 12,
+		titulo: 'Cem Anos de Solidão',
+		data_pub: new Date('1967-05-30'),
+		sinopse: 'A saga da família Buendía ao longo de várias gerações na cidade fictícia de Macondo, explorando temas de realismo mágico.',
+		generos: ['realismo mágico', 'drama'],
+		status: 'disponível',
+		qtdd_disponivel: 3,
+		num_paginas: 417,
+		critica: [
+		  { veiculo: 'The New York Times', nota: 95 },
+		  { veiculo: 'Goodreads', nota: 97 }
+		],
+		emprestimo: [],
+		reserva: [],
+		autor_id: 10
+	  },
+	  {
+		_id: 13,
+		titulo: 'A Revolução dos Bichos',
+		data_pub: new Date('1945-08-17'),
+		sinopse: 'Uma fábula política sobre uma revolta dos animais contra seus donos humanos em uma fazenda.',
+		generos: ['ficção', 'sátira', 'política'],
+		status: 'disponível',
+		qtdd_disponivel: 7,
+		num_paginas: 112,
+		critica: [
+		  { veiculo: 'The Guardian', nota: 90 },
+		  { veiculo: 'Publishers Weekly', nota: 92 }
+		],
+		emprestimo: [],
+		reserva: [],
+		autor_id: 7
+	  },
+	  {
+		_id: 14,
+		titulo: 'Admirável Mundo Novo',
+		data_pub: new Date('1932-12-31'),
+		sinopse: 'Uma distopia que explora um futuro onde as pessoas são geneticamente criadas e controladas por um governo totalitário.',
+		generos: ['ficção científica', 'distopia'],
+		status: 'disponível',
+		qtdd_disponivel: 6,
+		num_paginas: 268,
+		critica: [
+		  { veiculo: 'The New York Times', nota: 91 },
+		  { veiculo: 'Goodreads', nota: 89 }
+		],
+		emprestimo: [],
+		reserva: [],
+		autor_id: 11
+	  },
+	  {
+		_id: 15,
+		titulo: 'O Pequeno Príncipe',
+		data_pub: new Date('1943-04-06'),
+		sinopse: 'Um piloto que cai no deserto do Saara encontra um jovem príncipe que lhe conta sobre suas viagens a vários planetas.',
+		generos: ['infantil', 'filosofia', 'aventura'],
+		status: 'disponível',
+		qtdd_disponivel: 10,
+		num_paginas: 96,
+		critica: [
+		  { veiculo: 'The New York Times', nota: 98 },
+		  { veiculo: 'Goodreads', nota: 96 }
+		],
+		emprestimo: [],
+		reserva: [],
+		autor_id: 12
+	  }
 ]);
   
 
