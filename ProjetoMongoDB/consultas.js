@@ -118,3 +118,22 @@ db.membros.aggregate([
     _id: "$emprestimos.livro_id", maior_periodo: { $max: "$periodo_emprestimo_dias" }
   }}
 ]);
+
+
+// Criando índice de texto nos campos que desejamos pesquisar
+db.eventos.createIndex({
+	nome: "text",
+	descricao: "text"
+});
+// AGGREGATE, MATCH, TEXT, SEARCH, PROJECT e EXPR: retorna os eventos que mencionam a palavra "livro" e têm mais de um autor
+db.eventos.aggregate([
+	{ $match: { $text: {  $search: "livro" } }},
+	{ $match: {$expr: { $gt: [{ $size: "$autores" }, 1] }}},
+  { $project: {
+      _id: 0, 
+      nome: 1,
+      descricao: 1,
+      num_autores: { $size: "$autores" },
+      num_membros: { $size: "$membros" }
+    }}
+]);
