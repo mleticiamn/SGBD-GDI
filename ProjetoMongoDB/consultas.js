@@ -13,4 +13,13 @@ db.livros.find({
       }
     }
 });
+
+//FIND: retorna livros do genero aventura 
+db.livros.find({generos: 'aventura'});
+//FIND e GTE: retorna livros disponíveis
+db.livros.find({qtdd_disponivel: {$gt: 0}});
+//FIND: retorna livros indisponíveis
+db.livros.find({qtdd_disponivel: 0});
+//FIND: retorna livros publicados no ano mais recente
+db.livros.find({data_pub: {$gt: new Date("2023-12-31T00:00:00.000Z")}});
   
