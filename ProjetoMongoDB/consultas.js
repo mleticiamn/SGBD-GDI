@@ -14,6 +14,15 @@ db.livros.find({
     }
 });
 
+// EXISTS e NE: retorna os eventos que tẽm autores e membros e são não vazios
+db.eventos.find({
+  $and: [
+    { autores: { $exists: true, $ne: [] } }, 
+    { membros: { $exists: true, $ne: [] } }  
+  ]
+});
+
+
 // AGGREGATE, PROJECT, SORT e LIMIT: retorna o nome autor que possui o maior número de prêmios
 db.autores.aggregate([
   {$project: {nome: 1, n_premios: {$size: "$premios"}}},
