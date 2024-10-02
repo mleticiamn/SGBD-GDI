@@ -246,7 +246,7 @@ db.membros.insertMany([
 
   
 
-  db.eventos.insertMany([
+db.eventos.insertMany([
 	{
 	  nome: 'Feira do Livro de Genebra',
 	  descricao: 'A Embaixada de Portugal em Genebra, em articulação com a Coordenação do Ensino Português na Suíça, participa na 35.ª feira anual do livro em Genebra, que decorre na PALEXPO entre os dias 6 e 10 de março de 2024.',

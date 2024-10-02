@@ -1,4 +1,4 @@
-// FIND e PRETTY: retorna os membros registrados na biblioteca
+// FIND e PRETTY: retorna os membros registrados na biblioteca de uma forma elegante
 db.membros.find({}).pretty();
 
 // FIND e COUNT: retorna a quantidade de autores
@@ -14,7 +14,7 @@ db.livros.find({
     }
 });
 
-// FIND e EXISTS: retorna os eventos que tẽm autores e membros e são não vazios
+// FIND e EXISTS: retorna os eventos que têm autores e membros e são não vazios
 db.eventos.find({
   $and: [
     { autores: { $exists: true, $ne: [] } }, 
@@ -25,7 +25,7 @@ db.eventos.find({
 // FIND e ALL: retorna os autores que possuem todos os prêmios listados
 db.autores.find({premios: {$all: ['Hampshire Book Award', 'Shamus Award for Best First P. I. Novel']}});
 
-// AGGREGATE, PROJECT, SORT e LIMIT: retorna o nome autor que possui o maior número de prêmios
+// AGGREGATE, PROJECT, SORT e LIMIT: retorna o nome autor que possui o maior número de prêmios e sua quantidade de prêmios
 db.autores.aggregate([
   {$project: {nome: 1, n_premios: {$size: "$premios"}}},
   {$sort: {n_premios: -1}},
@@ -104,3 +104,17 @@ db.eventos.aggregate([
   }
 ]).pretty();
 
+
+// UNWIND, AGGREGATE, GROUP e MAX: retorna o período máximo de empréstimo de cada livro em dias
+db.membros.aggregate([
+  { $unwind: "$emprestimos" },
+  { $addFields: {
+    periodo_emprestimo: {$subtract: ["$emprestimos.data_fim", "$emprestimos.data_inicio"]}
+  }},
+    { $addFields: {
+    periodo_emprestimo_dias: { $divide: ["$periodo_emprestimo", 1000 * 60 * 60 * 24]}
+  }},
+  { $group: {
+    _id: "$emprestimos.livro_id", maior_periodo: { $max: "$periodo_emprestimo_dias" }
+  }}
+]);
