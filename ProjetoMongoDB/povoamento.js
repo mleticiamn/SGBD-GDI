@@ -111,7 +111,7 @@ db.autores.insertMany([
 		db.livros.findOne({titulo: 'Percy Jackson e o Ladrão de Raios'}),
 		db.livros.findOne({titulo: 'Percy Jackson e o Mar de Monstros'}),
 	  ],
-	  premios: ['melhor autor 2006']
+	  premios: ['melhor autor 2006', 'Hampshire Book Award', 'Shamus Award for Best First P. I. Novel']
 	},
 	{
 	  _id: 2,

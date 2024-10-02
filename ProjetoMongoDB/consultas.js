@@ -22,6 +22,9 @@ db.eventos.find({
   ]
 });
 
+// FIND e ALL: retorna os autores que possuem todos os prêmios listados
+db.autores.find({premios: {$all: ['Hampshire Book Award', 'Shamus Award for Best First P. I. Novel']}});
+
 // AGGREGATE, PROJECT, SORT e LIMIT: retorna o nome autor que possui o maior número de prêmios
 db.autores.aggregate([
   {$project: {nome: 1, n_premios: {$size: "$premios"}}},
