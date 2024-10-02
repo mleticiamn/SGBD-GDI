@@ -16,6 +16,7 @@ db.livros.insertMany([
 	  generos: ['ação', 'aventura'],
 	  status: 'emprestado',
 	  qtdd_disponivel: 3,
+	  num_paginas: 256,
 	  critica: [
 	    { veiculo: 'The New York Times', nota: 90 },
 	    { veiculo: 'Kirkus Reviews', nota: 88 },
@@ -30,6 +31,7 @@ db.livros.insertMany([
 	  generos: ['ação', 'aventura'],
 	  status: 'reservado',
 	  qtdd_disponivel: 3,
+	  num_paginas: 304,
 	  critica: [
 	    { veiculo: 'The New York Times', nota: 85 },
 	    { veiculo: 'Kirkus Reviews', nota: 87 },
@@ -44,6 +46,7 @@ db.livros.insertMany([
 	  generos: ['mistério', 'suspense', 'aventura'],
 	  status: 'disponível',
 	  qtdd_disponivel: 10,
+	  num_paginas: 432,
 	  critica: [
 	    { veiculo: 'The New York Times', nota: 80 },
 	    { veiculo: 'Kirkus Reviews', nota: 85 },
@@ -58,6 +61,7 @@ db.livros.insertMany([
 	  generos: ['fantasia', 'aventura'],
 	  status: 'disponível',
 	  qtdd_disponivel: 5,
+	  num_paginas: 576,
 	  critica: [
 	    { veiculo: 'The New York Times', nota: 95 },
 	    { veiculo: 'Kirkus Reviews', nota: 97 },
@@ -72,6 +76,7 @@ db.livros.insertMany([
 	  generos: ['drama', 'romance'],
 	  status: 'disponível',
 	  qtdd_disponivel: 7,
+	  num_paginas: 288,
 	  critica: [
 	    { veiculo: 'The New York Times', nota: 88 },
 	    { veiculo: 'Kirkus Reviews', nota: 90 },
@@ -86,6 +91,7 @@ db.livros.insertMany([
 	  generos: ['romance', 'drama'],
 	  status: 'disponível',
 	  qtdd_disponivel: 4,
+	  num_paginas: 424,
 	  critica: [
 	    { veiculo: 'The New York Times', nota: 92 },
 	    { veiculo: 'Publishers Weekly', nota: 94 },

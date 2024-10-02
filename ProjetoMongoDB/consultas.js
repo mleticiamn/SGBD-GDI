@@ -14,6 +14,8 @@ db.livros.find({
     }
 });
 
+// 
+
 //FIND: retorna livros do genero aventura 
 db.livros.find({generos: 'aventura'});
 //FIND e GTE: retorna livros disponíveis
