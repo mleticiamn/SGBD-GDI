@@ -273,3 +273,27 @@ db.membros.insertMany([
 ]);
   
 
+//FUNCTION: Função para emprestar um livro a um membro
+function emprestarLivro(membro_id, livro_id, data_inicio, data_fim) {
+    const livro = db.livros.findOne({_id: livro_id});
+    
+    if (!livro || livro.qtdd_disponivel === 0) {
+        print(`Livro ${livro_id} não está disponível para empréstimo.`);
+        return;
+    }
+    db.livros.updateOne(
+        { _id: livro_id },
+        {
+            $inc: { qtdd_disponivel: -1 }, 
+            $push: { emprestimo: { membro_id: membro_id, data_inicio: data_inicio, data_fim: data_fim } }
+        }
+    );
+    db.membros.updateOne(
+        { _id: membro_id },
+        {
+            $push: { emprestimos: { livro_id: livro_id, data_inicio: data_inicio, data_fim: data_fim } }
+        }
+    );
+
+    print(`Livro ${livro.titulo} emprestado ao membro ${membro_id}.`);
+}
