@@ -137,3 +137,18 @@ db.eventos.aggregate([
       num_membros: { $size: "$membros" }
     }}
 ]);
+
+//AGGREGATE, PROJECT, COND e SIZE: se o autor escreveu mais de um livro, retorna o número de livros. Caso contrário, retorna o título do único livro
+db.autores.aggregate([
+  {$project: {
+      nome: 1,
+      livros_info: {
+        $cond: {
+          if: { $gt: [{ $size: "$livros_escritos" }, 1] },
+          then: { $size: "$livros_escritos" },
+          else: { $arrayElemAt: ["$livros_escritos.titulo", 0] }
+        }
+      }
+    }
+  }
+]);
