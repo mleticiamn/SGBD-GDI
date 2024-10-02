@@ -201,11 +201,10 @@ db.membros.insertMany([
 	}
 ]);
   
-
 db.emprestimos.insertOne(
 	{
-	livro_id: 1,
-	membro_id: 1,
+	livro_id: db.livros.findOne({titulo: 'Percy Jackson e o Ladrão de Raios'}),
+	membro_id: db.membros.findOne({nome: 'José da Silva'}),
 	data: new Date('2024-06-05'),
 	tempo: '7 dias'
 	}
@@ -213,8 +212,8 @@ db.emprestimos.insertOne(
 
 db.reservas.insertOne(
 	{
-	livro_id: 1,
-	membro_id: 1,
-	data: new Date('2024-06-09'),
+	livro_id: db.livros.findOne({titulo: 'Percy Jackson e o Mar de Monstros'}),
+	membro_id: db.membros.findOne({nome: 'Ana Pereira'}),
+	data: new Date('2024-06-09')
 	}
 );
