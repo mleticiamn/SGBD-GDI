@@ -297,3 +297,17 @@ function emprestarLivro(membro_id, livro_id, data_inicio, data_fim) {
 
     print(`Livro ${livro.titulo} emprestado ao membro ${membro_id}.`);
 }
+
+//FUNCTIO, UPDATEONE e ADDTOSET: Função para adicionar gênero a um livro caso não exista
+const generosValidos = ['ação', 'aventura', 'fantasia', 'drama', 'romance'];
+function adicionarGenero(livroId, genero) {
+    if (generosValidos.includes(genero)) {
+        db.livros.updateOne(
+            { _id: livroId },
+            { $addToSet: { generos: genero } } 
+        );
+
+    } else {
+        print(`Gênero ${genero} não é válido.`);
+    }
+}
