@@ -59,4 +59,31 @@ db.livros.aggregate([
   { $group: { _id: "$status", totalDisponivel: { $sum: "$qtdd_disponivel" } } }
 ]);
 
+//AGGREGATE, LOOKUP: retorna a relação entre cada evento, seus autores e os livros publicados por esses autores
+db.eventos.aggregate([
+  {
+    $lookup: {
+      from: "autores",                   
+      localField: "autores.nome",        
+      foreignField: "nome",          
+      as: "detalhes_autores"          
+    }
+  },
+  {
+    $lookup: {
+      from: "livros",                   
+      localField: "detalhes_autores._id",
+      foreignField: "autor_id",         
+      as: "livros_autores_evento"    
+    }
+  },
+  {
+    $project: {                          
+      nome: 1,
+      descricao: 1,
+      "detalhes_autores.nome": 1,
+      livros_autores_evento: 1
+    }
+  }
+]).pretty();
 
