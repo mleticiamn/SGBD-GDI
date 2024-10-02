@@ -47,6 +47,23 @@ db.livros.find({qtdd_disponivel: 0});
 //FIND: retorna livros publicados no ano mais recente
 db.livros.find({data_pub: {$gt: new Date("2023-12-31T00:00:00.000Z")}});
 
+//FIND, FILTER e WHERE: retorna alguns dados dos livros com número de páginas entre 300 e 500 tendo críticas em um veículo
+db.livros.find({
+    $where: "this.num_paginas >= 300 && this.num_paginas <= 500 && this.critica.some(critica => critica.veiculo === 'The New York Times')"
+}, {
+    titulo: 1,                          
+    num_paginas: 1,                
+    critica: {                        
+        $filter: {
+            input: "$critica",
+            as: "critica",
+            cond: { $eq: ["$$critica.veiculo", "The New York Times"] }
+        }
+    },
+    autor_id: 1                          
+}).pretty();
+
+
 //AGGREGATE, MATCH, GROUP e AVG: retorna a média das críticas de cada livro
 db.livros.aggregate([
   { $unwind: '$critica' },
