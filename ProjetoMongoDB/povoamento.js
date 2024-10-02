@@ -201,31 +201,49 @@ db.autores.insertMany([
 		premios: ['Clássico da Literatura Inglesa']
 	  }
 ]);
-  
 
 db.membros.insertMany([
-	{
-	  _id: 1,
-	  idade: 65,
-	  nome: 'José da Silva',
-	  data_filiacao: new Date('2022-06-05'),
-	  email: 'josesilva@gmail.com'
-	},
-	{
-	  _id: 2,
-	  idade: 34,
-	  nome: 'Maria Souza',
-	  data_filiacao: new Date('2023-01-12'),
-	  email: 'mariasouza@gmail.com'
-	},
-	{
-	  _id: 3,
-	  idade: 15,
-	  nome: 'Ana Pereira',
-	  data_filiacao: new Date('2021-11-22'),
-	  email: 'anapereira@gmail.com'
-	}
-  ]);
+    {
+        _id: 1,
+        idade: 65,
+        nome: 'José da Silva',
+        data_filiacao: new Date('2022-06-05'),
+        email: 'josesilva@gmail.com',
+        emprestimos: [
+            {livro_id: 1, data_inicio: new Date('2024-06-05'), data_fim: new Date('2024-06-12')},
+            {livro_id: 2, data_inicio: new Date('2024-02-07'), data_fim: new Date('2024-02-14')},
+            {livro_id: 6, data_inicio: new Date('2024-04-15'), data_fim: new Date('2024-04-22')}
+        ],
+        reservas: []
+    },
+    {
+        _id: 2,
+        idade: 34,
+        nome: 'Maria Souza',
+        data_filiacao: new Date('2023-01-12'),
+        email: 'mariasouza@gmail.com',
+        emprestimos: [
+            {livro_id: 3, data_inicio: new Date('2024-06-21'), data_fim: new Date('2024-06-28')},
+            {livro_id: 4, data_inicio: new Date('2024-05-15'), data_fim: new Date('2024-05-22')}
+        ],
+        reservas: [
+            {livro_id: 2, data_pedido: new Date('2024-07-08')}
+        ]
+    },
+    {
+        _id: 3,
+        idade: 15,
+        nome: 'Ana Pereira',
+        data_filiacao: new Date('2021-11-22'),
+        email: 'anapereira@gmail.com',
+        emprestimos: [
+            {livro_id: 5, data_inicio: new Date('2024-07-18'), data_fim: new Date('2024-07-25')},
+            {livro_id: 2, data_inicio: new Date('2024-02-05'), data_fim: new Date('2024-02-12')}
+        ],
+        reservas: []
+    }
+]);
+
   
 
   db.eventos.insertMany([
@@ -254,19 +272,4 @@ db.membros.insertMany([
 	}
 ]);
   
-db.emprestimos.insertOne(
-	{
-	livro_id: db.livros.findOne({titulo: 'Percy Jackson e o Ladrão de Raios'}),
-	membro_id: db.membros.findOne({nome: 'José da Silva'}),
-	data: new Date('2024-06-05'),
-	tempo: '7 dias'
-	}
-);
 
-db.reservas.insertOne(
-	{
-	livro_id: db.livros.findOne({titulo: 'Percy Jackson e o Mar de Monstros'}),
-	membro_id: db.membros.findOne({nome: 'Ana Pereira'}),
-	data: new Date('2024-06-09')
-	}
-);
