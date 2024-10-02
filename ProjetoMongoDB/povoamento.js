@@ -153,18 +153,21 @@ db.autores.insertMany([
 db.membros.insertMany([
 	{
 	  _id: 1,
+	  idade: 65,
 	  nome: 'José da Silva',
 	  data_filiacao: new Date('2022-06-05'),
 	  email: 'josesilva@gmail.com'
 	},
 	{
 	  _id: 2,
+	  idade: 34,
 	  nome: 'Maria Souza',
 	  data_filiacao: new Date('2023-01-12'),
 	  email: 'mariasouza@gmail.com'
 	},
 	{
 	  _id: 3,
+	  idade: 15,
 	  nome: 'Ana Pereira',
 	  data_filiacao: new Date('2021-11-22'),
 	  email: 'anapereira@gmail.com'
