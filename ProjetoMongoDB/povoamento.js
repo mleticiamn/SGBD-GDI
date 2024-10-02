@@ -16,17 +16,25 @@ db.livros.insertMany([
 	  generos: ['ação', 'aventura'],
 	  status: 'emprestado',
 	  qtdd_disponivel: 3,
-	  critica: 92
+	  critica: [
+	    { veiculo: 'The New York Times', nota: 90 },
+	    { veiculo: 'Kirkus Reviews', nota: 88 },
+	    { veiculo: 'Goodreads', nota: 92 }
+	  ]
 	},
 	{
-	_id: 2,
-	titulo: 'Percy Jackson e o Mar de Monstros',
-	data_pub: new Date('2006-05-03'),
-	sinopse: 'Para salvar o mundo, Percy e seus amigos precisam encontrar o poderoso e mágico Velocino de Ouro. ',
-	generos: ['ação', 'aventura'],
-	status: 'reservado',
-	qtdd_disponivel: 3,
-	critica: 92
+	  _id: 2,
+	  titulo: 'Percy Jackson e o Mar de Monstros',
+	  data_pub: new Date('2006-05-03'),
+	  sinopse: 'Para salvar o mundo, Percy e seus amigos precisam encontrar o poderoso e mágico Velocino de Ouro.',
+	  generos: ['ação', 'aventura'],
+	  status: 'reservado',
+	  qtdd_disponivel: 3,
+	  critica: [
+	    { veiculo: 'The New York Times', nota: 85 },
+	    { veiculo: 'Kirkus Reviews', nota: 87 },
+	    { veiculo: 'Goodreads', nota: 91 }
+	  ]
 	},
 	{
 	  _id: 3,
@@ -36,7 +44,11 @@ db.livros.insertMany([
 	  generos: ['mistério', 'suspense', 'aventura'],
 	  status: 'disponível',
 	  qtdd_disponivel: 10,
-	  critica: 85
+	  critica: [
+	    { veiculo: 'The New York Times', nota: 80 },
+	    { veiculo: 'Kirkus Reviews', nota: 85 },
+	    { veiculo: 'Goodreads', nota: 90 }
+	  ]
 	},
 	{
 	  _id: 4,
@@ -46,28 +58,40 @@ db.livros.insertMany([
 	  generos: ['fantasia', 'aventura'],
 	  status: 'disponível',
 	  qtdd_disponivel: 5,
-	  critica: 98
+	  critica: [
+	    { veiculo: 'The New York Times', nota: 95 },
+	    { veiculo: 'Kirkus Reviews', nota: 97 },
+	    { veiculo: 'Goodreads', nota: 98 }
+	  ]
 	},
 	{
-		_id: 5,
-		titulo: 'A Culpa é das Estrelas',
-		data_pub: new Date('2012-01-10'),
-		sinopse: 'Dois adolescentes com câncer se apaixonam e compartilham uma jornada emocionante sobre o significado da vida e do amor.',
-		generos: ['drama', 'romance'],
-		status: 'disponível',
-		qtdd_disponivel: 7,
-		critica: 90
-	  },
-	  {
-		_id: 6,
-		titulo: 'Orgulho e Preconceito',
-		data_pub: new Date('1813-01-28'),
-		sinopse: 'Uma jovem inteligente e independente enfrenta os desafios do orgulho, preconceito e mal-entendidos em uma sociedade inglesa rígida.',
-		generos: ['romance', 'drama'],
-		status: 'disponível',
-		qtdd_disponivel: 4,
-		critica: 95
-	  }
+	  _id: 5,
+	  titulo: 'A Culpa é das Estrelas',
+	  data_pub: new Date('2012-01-10'),
+	  sinopse: 'Dois adolescentes com câncer se apaixonam e compartilham uma jornada emocionante sobre o significado da vida e do amor.',
+	  generos: ['drama', 'romance'],
+	  status: 'disponível',
+	  qtdd_disponivel: 7,
+	  critica: [
+	    { veiculo: 'The New York Times', nota: 88 },
+	    { veiculo: 'Kirkus Reviews', nota: 90 },
+	    { veiculo: 'Goodreads', nota: 92 }
+	  ]
+	},
+	{
+	  _id: 6,
+	  titulo: 'Orgulho e Preconceito',
+	  data_pub: new Date('1813-01-28'),
+	  sinopse: 'Uma jovem inteligente e independente enfrenta os desafios do orgulho, preconceito e mal-entendidos em uma sociedade inglesa rígida.',
+	  generos: ['romance', 'drama'],
+	  status: 'disponível',
+	  qtdd_disponivel: 4,
+	  critica: [
+	    { veiculo: 'The New York Times', nota: 92 },
+	    { veiculo: 'Publishers Weekly', nota: 94 },
+	    { veiculo: 'Goodreads', nota: 95 }
+	  ]
+	}
 ]);
   
 
