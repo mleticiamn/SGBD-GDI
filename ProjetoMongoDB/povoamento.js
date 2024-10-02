@@ -30,7 +30,7 @@ db.autores.insertOne(
 	data_nasc: new Date('1964-06-05'),
 	email: 'rickriordan@gmail.com',
 	livros_escritos: [
-			1	
+		db.livros.findOne({titulo: 'Percy Jackson e o Ladrão de Raios'})	
 		],
 	premios: [
 		'melhor autor 2006'
@@ -49,14 +49,12 @@ db.membros.insertOne(
 
 db.eventos.insertOne(
 	{
-	nome: 'Livros do ano',
+	nome: 'Feira do Livro de Genebra',
 	autores: [
-		{autor_id: 1,
-		nome: 'Richard Russell Riordan Jr'}
+		db.autores.findOne({nome: 'Richard Russell Riordan Jr'})
 		],
 	membros: [
-		{membro_id: 1,
-		nome: 'José da Silva'}
+		db.membros.findOne({nome: 'José da Silva'})
 		]
 	}
 );
