@@ -18,7 +18,8 @@ db.livros.insertOne(
 		'aventura'
 		],
 	status: 'emprestado',
-	qtdd_disponivel: 3
+	qtdd_disponivel: 3,
+	critica: 92
 	}
 );
 
@@ -29,9 +30,7 @@ db.autores.insertOne(
 	data_nasc: Date('05/06/1964'),
 	email: 'rickriordan@gmail.com',
 	livros_escritos: [
-		{titulo_livro: 1,
-			critica: 92
-		}
+			1	
 		],
 	premios: [
 		'melhor autor 2006'
