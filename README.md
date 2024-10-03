@@ -1,6 +1,6 @@
 # Gerenciamento de Dados e Informações
 Repositório utilizado para os projetos da disciplina de GDI.
-Grupo
+### Grupo:
 - Eduardo Noblat (evdcn)
 - Letícia Pedrosa (lblp)
 - Maria Letícia Maranhão (mlmn3)
