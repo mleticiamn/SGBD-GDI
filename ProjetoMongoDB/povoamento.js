@@ -1,10 +1,7 @@
 use ('biblioteca');
 
+// ------- EVENTOS -------
 db.createCollection("livros");
-db.createCollection("autores");
-db.createCollection("membros");
-db.createCollection("eventos");
-
 
 db.livros.insertMany([
 	{
@@ -318,7 +315,10 @@ db.livros.insertMany([
 		autor_id: 12
 	  }
 ]);
-  
+
+
+//------- AUTORES ------
+db.createCollection("autores");
 
 db.autores.insertMany([
 	{
@@ -446,6 +446,10 @@ db.autores.insertMany([
 	  }
 ]);
 
+
+//-------- MEMBROS -------
+db.createCollection("membros");
+
 db.membros.insertMany([
     {
         _id: 1,
@@ -557,6 +561,9 @@ db.membros.insertMany([
     }
 ]);
 
+
+//--------- EVENTOS -------
+db.createCollection("eventos");
 
 db.eventos.insertMany([
 	{
