@@ -11,7 +11,6 @@ db.livros.find({qtdd_disponivel: {$gt: 0}});
 db.livros.find({data_pub: {$gt: new Date("2023-12-31T00:00:00.000Z")}});
 
 // FIND, ELEMMATCH e GTE: retorna todos os livros que têm pelo menos uma crítica do veículo The New York Times com uma nota maior ou igual a 90
-// FIND, ELEMMATCH e GTE: seleciona os livros que receberam uma nota maior ou igual a 90 do The New York Times
 db.livros.find({
     critica: {
       $elemMatch: {
@@ -77,11 +76,6 @@ db.livros.aggregate([
   { $unwind: '$critica' },
   { $match: { 'critica.nota': { $gt: 90 } } },
   { $group: { _id: '$titulo', media: { $avg: '$critica.nota' } } }
-]);
-
-//AGGREGATE, GROUP e SUM: retorna a quantidade total de livros disponíveis  por status
-db.livros.aggregate([
-  { $group: { _id: "$status", totalDisponivel: { $sum: "$qtdd_disponivel" } } }
 ]);
 
 //AGGREGATE, LOOKUP, PROJECT e PRETTY: retorna a relação entre cada evento, seus autores e os livros publicados por esses autores
