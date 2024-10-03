@@ -167,3 +167,21 @@ db.livros.updateOne(
   { $set: { qtdd_disponivel: 8 } }
 );
 
+// MAP REDUCE: contar os empréstimos por membro
+var mapFunction = function() {
+  this.emprestimos.forEach(function(emprestimo) {
+      emit(this._id, 1); 
+  }, this);
+};
+
+var reduceFunction = function(key, values) {
+  return Array.sum(values);  // Soma os valores para cada membro
+};
+
+db.membros.mapReduce(
+  mapFunction,
+  reduceFunction,
+  {
+      out: "emprestimos_por_membro"  // Nova coleção para os resultados
+  }
+);
