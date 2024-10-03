@@ -160,14 +160,14 @@ db.autores.aggregate([
   }
 ]);
 
-// RENAMECOLLETION: renomeia a coleção livros para livros_cadastrados no banco de dados biblioteca
-db.adminCommand({ renameCollection: "biblioteca.livros", to: "biblioteca.livros_cadastrados" });
-
 // UPDATEONE e SET: atualiza o campo qtdd_disponivel do livro com _id igual a 1 para 8
 db.livros.updateOne(
   { _id: 1 },
   { $set: { qtdd_disponivel: 8 } }
 );
+
+// RENAMECOLLETION: renomeia a coleção livros para livros_cadastrados no banco de dados biblioteca
+db.adminCommand({ renameCollection: "biblioteca.livros", to: "biblioteca.livros_cadastrados" });
 
 // Remoção de dado
 db.eventos.deleteOne({ nome: 'Conferência Internacional de Literatura' });
