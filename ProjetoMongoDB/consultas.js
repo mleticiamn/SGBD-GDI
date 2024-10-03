@@ -4,6 +4,12 @@ db.membros.find({}).pretty();
 // FIND e COUNT: retorna a quantidade de autores
 db.autores.find({}).count();
 
+//FIND e GTE: retorna livros disponíveis
+db.livros.find({qtdd_disponivel: {$gt: 0}});
+
+//FIND: retorna livros publicados no ano mais recente
+db.livros.find({data_pub: {$gt: new Date("2023-12-31T00:00:00.000Z")}});
+
 // FIND e ELEMMATCH: seleciona os livros que receberam uma nota maior ou igual a 90 do The New York Times
 db.livros.find({
     critica: {
@@ -39,13 +45,15 @@ db.livros.aggregate([
 ]);
 
 //FIND: retorna livros do genero aventura 
-db.livros.find({generos: 'aventura'});
-//FIND e GTE: retorna livros disponíveis
-db.livros.find({qtdd_disponivel: {$gt: 0}});
-//FIND: retorna livros indisponíveis
-db.livros.find({qtdd_disponivel: 0});
-//FIND: retorna livros publicados no ano mais recente
-db.livros.find({data_pub: {$gt: new Date("2023-12-31T00:00:00.000Z")}});
+db.livros.find({ generos: 'aventura'},
+  {
+      titulo: 1,
+      sinopse: 1,
+      qtdd_disponivel: 1,
+      data_pub: 1,
+      _id: 0
+  }
+);
 
 //FIND, FILTER e WHERE: retorna alguns dados dos livros com número de páginas entre 300 e 500 tendo críticas em um veículo
 db.livros.find({
@@ -62,7 +70,6 @@ db.livros.find({
     },
     autor_id: 1                          
 }).pretty();
-
 
 //AGGREGATE, MATCH, GROUP e AVG: retorna a média das críticas de cada livro
 db.livros.aggregate([
@@ -104,7 +111,6 @@ db.eventos.aggregate([
   }
 ]).pretty();
 
-
 // UNWIND, AGGREGATE, GROUP e MAX: retorna o período máximo de empréstimo de cada livro em dias
 db.membros.aggregate([
   { $unwind: "$emprestimos" },
@@ -118,7 +124,6 @@ db.membros.aggregate([
     _id: "$emprestimos.livro_id", maior_periodo: { $max: "$periodo_emprestimo_dias" }
   }}
 ]);
-
 
 // Criando índice de texto nos campos que desejamos pesquisar
 db.eventos.createIndex({
