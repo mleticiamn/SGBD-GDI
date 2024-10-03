@@ -666,7 +666,7 @@ db.eventos.insertMany([
     }
 ]);
 
-//FUNCTION: Função para emprestar um livro a um membro
+//FUNCTION e REMOÇÃO: Função para emprestar um livro a um membro
 function emprestarLivro(membro_id, livro_id, data_inicio, data_fim) {
     const livro = db.livros.findOne({_id: livro_id});
     
@@ -687,11 +687,58 @@ function emprestarLivro(membro_id, livro_id, data_inicio, data_fim) {
             $push: { emprestimos: { livro_id: livro_id, data_inicio: data_inicio, data_fim: data_fim } }
         }
     );
+//Remove a reserva, se houver
+    db.livros.updateOne(
+        { _id: livro_id },
+        {
+            $pull: { reserva: { membro_id: membro_id } }
+        }
+    );
+
+    db.membros.updateOne(
+        { _id: membro_id },
+        {
+            $pull: { reservas: { livro_id: livro_id } }
+        }
+    );
 
     print(`Livro ${livro.titulo} emprestado ao membro ${membro_id}.`);
 }
 
-//FUNCTIO, UPDATEONE e ADDTOSET: Função para adicionar gênero a um livro caso não exista
+//FUNCTION, UPDATE e ADDTOSET
+function reservarLivro(membro_id, livro_id, data_pedido) {
+    const livro = db.livros.findOne({_id: livro_id});
+    if (!livro || livro.qtdd_disponivel !== 0) {
+        print(`Livro ${livro_id} está disponível para empréstimo, não é necessário reservar.`);
+        return;
+    }
+
+    const reservaExistente = db.livros.findOne({
+        _id: livro_id, 
+        reserva: { $elemMatch: { membro_id: membro_id } }
+    });
+    if (reservaExistente) {
+        print(`Membro ${membro_id} já fez uma reserva para o livro ${livro_id}.`);
+        return;
+    }
+
+    db.livros.updateOne(
+        { _id: livro_id },
+        {
+            $addToSet: { reserva: { membro_id: membro_id, data_pedido: data_pedido } }
+        }
+    );
+    db.membros.updateOne(
+        { _id: membro_id },
+        {
+            $addToSet: { reservas: { livro_id: livro_id, data_pedido: data_pedido } }
+        }
+    );
+
+    print(`Livro ${livro.titulo} reservado ao membro ${membro_id}.`);
+}
+
+//FUNCTION, UPDATEONE e ADDTOSET: Função para adicionar gênero a um livro caso não exista
 const generosValidos = ['ação', 'aventura', 'fantasia', 'drama', 'romance', "terror", "suspense"];
 function adicionarGenero(livroId, genero) {
     if (generosValidos.includes(genero)) {
