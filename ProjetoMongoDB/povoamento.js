@@ -4,8 +4,7 @@ db.createCollection("livros");
 db.createCollection("autores");
 db.createCollection("membros");
 db.createCollection("eventos");
-db.createCollection("emprestimos");
-db.createCollection("reservas");
+
 
 db.livros.insertMany([
 	{
@@ -558,7 +557,6 @@ db.membros.insertMany([
     }
 ]);
 
-  
 
 db.eventos.insertMany([
 	{
@@ -583,9 +581,83 @@ db.eventos.insertMany([
 		db.membros.findOne({nome: 'Maria Souza'}),
 		db.membros.findOne({nome: 'Ana Pereira'})
 	  ]
-	}
+	},
+	{
+        nome: 'Festival Literário de Brasília',
+        descricao: 'Um festival literário que amantes da literatura em um evento cultural vibrante. O festival acontecerá de 15 a 18 de agosto de 2024, com atividades para todas as idades.',
+        autores: [],
+        membros: [
+            db.membros.findOne({nome: 'Ricardo Lima'}),
+            db.membros.findOne({nome: 'Claudia Martins'}),
+            db.membros.findOne({nome: 'José da Silva'}),
+            db.membros.findOne({nome: 'Maria Souza'}),
+            db.membros.findOne({nome: 'Ana Pereira'})
+        ]
+    },
+    {
+        nome: 'Encontro de Escritores de São Paulo',
+        descricao: 'Um encontro anual de escritores e leitores para discutir tendências literárias, troca de ideias e networking. O evento acontecerá no dia 25 de novembro de 2024.',
+        autores: [
+            db.autores.findOne({nome: 'Richard Russell Riordan Jr'}),
+            db.autores.findOne({nome: 'Dan Brown'}),
+            db.autores.findOne({nome: 'John Green'})
+        ],
+        membros: [
+            db.membros.findOne({nome: 'José da Silva'}),
+            db.membros.findOne({nome: 'Ana Pereira'}),
+            db.membros.findOne({nome: 'Lucas Oliveira'}),
+            db.membros.findOne({nome: 'Maria Souza'})
+        ]
+    },
+    {
+        nome: 'Conferência Internacional de Literatura',
+        descricao: 'Um evento que reúne autores de renome mundial para discutir a literatura contemporânea, seus desafios e inovações. A conferência ocorrerá de 10 a 12 de outubro de 2024.',
+        autores: [
+            db.autores.findOne({nome: 'J.R.R. Tolkien'}),
+            db.autores.findOne({nome: 'Jane Austen'}),
+            db.autores.findOne({nome: 'Dan Brown'})
+        ],
+        membros: [
+            db.membros.findOne({nome: 'Maria Souza'}),
+        ]
+    },
+    {
+        nome: 'Feira do Livro de Porto Alegre',
+        descricao: 'Evento literário que promove a venda de livros, autógrafos com autores e palestras sobre literatura. A feira acontecerá de 5 a 8 de setembro de 2024.',
+        autores: [
+            db.autores.findOne({nome: 'John Green'}),
+            db.autores.findOne({nome: 'Richard Russell Riordan Jr'})
+        ],
+        membros: [
+            db.membros.findOne({nome: 'Claudia Martins'}),
+            db.membros.findOne({nome: 'André Gomes'}),
+            db.membros.findOne({nome: 'Ana Pereira'}),
+            db.membros.findOne({nome: 'José da Silva'}),
+            db.membros.findOne({nome: 'Maria Souza'})
+        ]
+    },
+    {
+        nome: 'Grande Encontro de Membros da Biblioteca',
+        descricao: 'Um evento especial para todos os membros da biblioteca. Haverá palestras, workshops e oportunidades de networking. O evento acontecerá em 20 de dezembro de 2024.',
+        autores: [
+            db.autores.findOne({nome: 'Richard Russell Riordan Jr'}),
+            db.autores.findOne({nome: 'Dan Brown'}),
+            db.autores.findOne({nome: 'John Green'}),
+            db.autores.findOne({nome: 'J.R.R. Tolkien'}),
+            db.autores.findOne({nome: 'Jane Austen'})
+        ],
+        membros: [
+            db.membros.findOne({nome: 'José da Silva'}),
+            db.membros.findOne({nome: 'Maria Souza'}),
+            db.membros.findOne({nome: 'Ana Pereira'}),
+            db.membros.findOne({nome: 'Ricardo Lima'}),
+            db.membros.findOne({nome: 'Claudia Martins'}),
+            db.membros.findOne({nome: 'André Gomes'}),
+            db.membros.findOne({nome: 'Lucas Oliveira'}),
+            db.membros.findOne({nome: 'Fernanda Costa'})
+        ]
+    }
 ]);
-  
 
 //FUNCTION: Função para emprestar um livro a um membro
 function emprestarLivro(membro_id, livro_id, data_inicio, data_fim) {
