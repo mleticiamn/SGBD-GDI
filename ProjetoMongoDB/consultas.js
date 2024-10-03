@@ -4,13 +4,10 @@ db.membros.find({}).pretty();
 // FIND e COUNT: retorna a quantidade de autores
 db.autores.find({}).count();
 
-//FIND e GTE: retorna livros disponíveis
+//FIND e GT: retorna livros disponíveis
 db.livros.find({qtdd_disponivel: {$gt: 0}});
 
-//FIND: retorna livros publicados no ano mais recente
-db.livros.find({data_pub: {$gt: new Date("2023-12-31T00:00:00.000Z")}});
-
-// FIND e ELEMMATCH: seleciona os livros que receberam uma nota maior ou igual a 90 do The New York Times
+// FIND, ELEMMATCH e GTE: seleciona os livros que receberam uma nota maior ou igual a 90 do The New York Times
 db.livros.find({
     critica: {
       $elemMatch: {
@@ -21,12 +18,19 @@ db.livros.find({
 });
 
 // FIND e EXISTS: retorna os eventos que têm autores e membros e são não vazios
-db.eventos.find({
-  $and: [
-    { autores: { $exists: true, $ne: [] } }, 
-    { membros: { $exists: true, $ne: [] } }  
-  ]
-});
+db.eventos.find(
+  {
+    $and: [
+      { autores: { $exists: true, $ne: [] } }, 
+      { membros: { $exists: true, $ne: [] } }  
+    ]
+  },
+  {
+    nome: 1,
+    _id: 0
+  }
+);
+
 
 // FIND e ALL: retorna os autores que possuem todos os prêmios listados
 db.autores.find({premios: {$all: ['Hampshire Book Award', 'Shamus Award for Best First P. I. Novel']}});
@@ -166,6 +170,9 @@ db.livros.updateOne(
   { _id: 1 },
   { $set: { qtdd_disponivel: 8 } }
 );
+
+// Remoção de dado
+db.eventos.deleteOne({ nome: 'Conferência Internacional de Literatura' });
 
 // MAP REDUCE: contar os empréstimos por membro
 var mapFunction = function() {
