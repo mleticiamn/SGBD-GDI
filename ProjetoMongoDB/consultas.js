@@ -12,12 +12,12 @@ db.livros.find({data_pub: {$gt: new Date("2023-12-31T00:00:00.000Z")}});
 
 // FIND e ELEMMATCH: seleciona os livros que receberam uma nota maior ou igual a 90 do The New York Times
 db.livros.find({
-  critica: {
-    $elemMatch: {
-      veiculo: "The New York Times",
-      nota: { $gte: 90 }
+    critica: {
+      $elemMatch: {
+        veiculo: "The New York Times",
+        nota: { $gte: 90 }
+      }
     }
-  }
 });
 
 // FIND e EXISTS: retorna os eventos que têm autores e membros e são não vazios
@@ -47,17 +47,17 @@ db.livros.aggregate([
 //FIND: retorna livros do genero aventura 
 db.livros.find({ generos: 'aventura'},
   {
-    titulo: 1,
-    sinopse: 1,
-    qtdd_disponivel: 1,
-    data_pub: 1,
-    _id: 0
+      titulo: 1,
+      sinopse: 1,
+      qtdd_disponivel: 1,
+      data_pub: 1,
+      _id: 0
   }
 );
 
 //FIND, FILTER e WHERE: retorna alguns dados dos livros com número de páginas entre 300 e 500 tendo críticas em um veículo
 db.livros.find({
-  $where: "this.num_paginas >= 300 && this.num_paginas <= 500 && this.critica.some(critica => critica.veiculo === 'The New York Times')"
+    $where: "this.num_paginas >= 300 && this.num_paginas <= 500 && this.critica.some(critica => critica.veiculo === 'The New York Times')"
 }, {
     titulo: 1,                          
     num_paginas: 1,                
@@ -127,13 +127,13 @@ db.membros.aggregate([
 
 // Criando índice de texto nos campos que desejamos pesquisar
 db.eventos.createIndex({
-  nome: "text",
-  descricao: "text"
+	nome: "text",
+	descricao: "text"
 });
 // AGGREGATE, MATCH, TEXT, SEARCH, PROJECT e EXPR: retorna os eventos que mencionam a palavra "livro" e têm mais de um autor
 db.eventos.aggregate([
-  { $match: { $text: {  $search: "livro" } }},
-  { $match: {$expr: { $gt: [{ $size: "$autores" }, 1] }}},
+	{ $match: { $text: {  $search: "livro" } }},
+	{ $match: {$expr: { $gt: [{ $size: "$autores" }, 1] }}},
   { $project: {
       _id: 0, 
       nome: 1,
@@ -143,16 +143,27 @@ db.eventos.aggregate([
     }}
 ]);
 
-//AGGREGATE, PROJECT, COND e SIZE: se o autor escreveu mais de um livro, retorna o número de livros. Caso contrário, retorna o título do único livro
+// AGGREGATE, PROJECT, COND e SIZE: se o autor escreveu mais de um livro, retorna o número de livros. Caso contrário, retorna o título do único livro
 db.autores.aggregate([
   {$project: {
-    nome: 1,
-    livros_info: {
-      $cond: {
-        if: { $gt: [{ $size: "$livros_escritos" }, 1] },
-        then: { $size: "$livros_escritos" },
-        else: { $arrayElemAt: ["$livros_escritos.titulo", 0] }
+      nome: 1,
+      livros_info: {
+        $cond: {
+          if: { $gt: [{ $size: "$livros_escritos" }, 1] },
+          then: { $size: "$livros_escritos" },
+          else: { $arrayElemAt: ["$livros_escritos.titulo", 0] }
+        }
       }
     }
   }
-}]);
+]);
+
+// RENAME COLLETION
+db.adminCommand({ renameCollection: "biblioteca.livros", to: "biblioteca.livros_cadastrados" });
+
+// UPDATE ONE e SET
+db.livros.updateOne(
+  { _id: 1 },
+  { $set: { qtdd_disponivel: 8 } }
+);
+
