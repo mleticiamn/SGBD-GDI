@@ -1,6 +1,6 @@
 use ('biblioteca');
 
-// ------- EVENTOS -------
+// ------- LIVROS -------
 db.createCollection("livros");
 
 db.livros.insertMany([
