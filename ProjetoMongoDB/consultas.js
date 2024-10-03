@@ -7,6 +7,10 @@ db.autores.find({}).count();
 //FIND e GT: retorna livros disponíveis
 db.livros.find({qtdd_disponivel: {$gt: 0}});
 
+//FIND: retorna livros publicados após 31 de dezembro de 2023
+db.livros.find({data_pub: {$gt: new Date("2023-12-31T00:00:00.000Z")}});
+
+// FIND, ELEMMATCH e GTE: retorna todos os livros que têm pelo menos uma crítica do veículo The New York Times com uma nota maior ou igual a 90
 // FIND, ELEMMATCH e GTE: seleciona os livros que receberam uma nota maior ou igual a 90 do The New York Times
 db.livros.find({
     critica: {
@@ -17,38 +21,31 @@ db.livros.find({
     }
 });
 
-// FIND e EXISTS: retorna os eventos que têm autores e membros e são não vazios
-db.eventos.find(
-  {
-    $and: [
-      { autores: { $exists: true, $ne: [] } }, 
-      { membros: { $exists: true, $ne: [] } }  
-    ]
-  },
-  {
-    nome: 1,
-    _id: 0
-  }
-);
-
+// FIND e EXISTS: retorna os eventos que têm listas de autores e membros que não estão vazias
+db.eventos.find({
+  $and: [
+    { autores: { $exists: true, $ne: [] } }, 
+    { membros: { $exists: true, $ne: [] } }  
+  ]
+});
 
 // FIND e ALL: retorna os autores que possuem todos os prêmios listados
 db.autores.find({premios: {$all: ['Hampshire Book Award', 'Shamus Award for Best First P. I. Novel']}});
 
-// AGGREGATE, PROJECT, SORT e LIMIT: retorna o nome autor que possui o maior número de prêmios e sua quantidade de prêmios
+// AGGREGATE, PROJECT, SORT e LIMIT: retorna o nome e a quantidade de prêmios recebidos do autor que possui o maior número de prêmios
 db.autores.aggregate([
   {$project: {nome: 1, n_premios: {$size: "$premios"}}},
   {$sort: {n_premios: -1}},
   {$limit: 1}
 ]);
 
-// AGGREGATE, MATCH e GROUP: seleciona a média do número de páginas dos livros lançados a partir dos anos 2000
+// AGGREGATE, MATCH, GTE, GROUP e AVG: seleciona a média do número de páginas dos livros lançados a partir dos anos 2000
 db.livros.aggregate([
   { $match: { data_pub: { $gte: new Date('2000-01-01') } } },
   { $group: { _id: null,  media_paginas: { $avg: "$num_paginas" } } }
 ]);
 
-//FIND: retorna livros do genero aventura 
+//FIND: retorna títulos, sinopses, quantidades disponíveis e datas de publicação dos livros que pertencem ao gênero aventura
 db.livros.find({ generos: 'aventura'},
   {
       titulo: 1,
@@ -59,7 +56,7 @@ db.livros.find({ generos: 'aventura'},
   }
 );
 
-//FIND, FILTER e WHERE: retorna alguns dados dos livros com número de páginas entre 300 e 500 tendo críticas em um veículo
+//FIND, FILTER, WHERE, COND e PRETTY: retorna alguns dados dos livros com número de páginas entre 300 e 500 que possuem pelo menos uma crítica do The New York Times
 db.livros.find({
     $where: "this.num_paginas >= 300 && this.num_paginas <= 500 && this.critica.some(critica => critica.veiculo === 'The New York Times')"
 }, {
@@ -75,19 +72,19 @@ db.livros.find({
     autor_id: 1                          
 }).pretty();
 
-//AGGREGATE, MATCH, GROUP e AVG: retorna a média das críticas de cada livro
+//AGGREGATE, UNWIND, MATCH, GROUP e AVG: retorna a média das notas das críticas que são maiores que 90 para cada título de livro
 db.livros.aggregate([
   { $unwind: '$critica' },
   { $match: { 'critica.nota': { $gt: 90 } } },
   { $group: { _id: '$titulo', media: { $avg: '$critica.nota' } } }
 ]);
 
-//AGGREGATE, GROUP, SUM: retorna a quantidade total de livros disponíveis  por status
+//AGGREGATE, GROUP e SUM: retorna a quantidade total de livros disponíveis  por status
 db.livros.aggregate([
   { $group: { _id: "$status", totalDisponivel: { $sum: "$qtdd_disponivel" } } }
 ]);
 
-//AGGREGATE, LOOKUP: retorna a relação entre cada evento, seus autores e os livros publicados por esses autores
+//AGGREGATE, LOOKUP, PROJECT e PRETTY: retorna a relação entre cada evento, seus autores e os livros publicados por esses autores
 db.eventos.aggregate([
   {
     $lookup: {
@@ -134,7 +131,8 @@ db.eventos.createIndex({
 	nome: "text",
 	descricao: "text"
 });
-// AGGREGATE, MATCH, TEXT, SEARCH, PROJECT e EXPR: retorna os eventos que mencionam a palavra "livro" e têm mais de um autor
+
+// AGGREGATE, MATCH, TEXT, SEARCH, PROJECT, EXPR e SIZE: retorna os eventos que mencionam a palavra "livro" e que têm mais de um autor
 db.eventos.aggregate([
 	{ $match: { $text: {  $search: "livro" } }},
 	{ $match: {$expr: { $gt: [{ $size: "$autores" }, 1] }}},
@@ -147,7 +145,7 @@ db.eventos.aggregate([
     }}
 ]);
 
-// AGGREGATE, PROJECT, COND e SIZE: se o autor escreveu mais de um livro, retorna o número de livros. Caso contrário, retorna o título do único livro
+// AGGREGATE, PROJECT, COND e SIZE: se o autor escreveu mais de um livro, retorna o número de livros. Caso contrário, retorna o título do único livro que ele escreveu
 db.autores.aggregate([
   {$project: {
       nome: 1,
@@ -162,10 +160,10 @@ db.autores.aggregate([
   }
 ]);
 
-// RENAME COLLETION
+// RENAMECOLLETION: renomeia a coleção livros para livros_cadastrados no banco de dados biblioteca
 db.adminCommand({ renameCollection: "biblioteca.livros", to: "biblioteca.livros_cadastrados" });
 
-// UPDATE ONE e SET
+// UPDATEONE e SET: atualiza o campo qtdd_disponivel do livro com _id igual a 1 para 8
 db.livros.updateOne(
   { _id: 1 },
   { $set: { qtdd_disponivel: 8 } }
